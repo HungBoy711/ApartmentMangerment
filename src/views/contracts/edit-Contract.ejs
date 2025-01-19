@@ -1,0 +1,58 @@
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form action="/edit-Contract" method="POST">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Sửa hợp đồng</div>
+                        </div>
+                        <div class="card-body">
+                            <input type="hidden" id="ID" name="ID" value="">
+                            <div class="form-group">
+                                <label>Mã hợp đồng</label>
+                                <input type="text" id="ContractID" name="ContractID" class="form-control" value="">
+                            </div>
+                            <div class="form-group">
+                                <label>Số căn hộ</label>
+                                <input type="text" id="ApartNumber" name="ApartNumber" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Chủ sở hữu</label>
+                                <input type="text" id="Owner" name="Owner" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Loại hợp đồng</label>
+                                <select class="form-control" id="ContractType" name="ContractType">
+                                    <option>Cho thuê</option>
+                                    <option>Mua bán</option>
+                                </select>
+                            </div>
+                            <div class="form-group ">
+                                <label for="Size">Ngày bắt đầu</label>
+                                <input type="date" id="ContractStartDate" name="ContractStartDate" class="form-control">
+                            </div>
+                            <div class="form-group ">
+                                <label for="Size">Ngày Kết thúc</label>
+                                <input type="date" id="ContractEndDate" name="ContractEndDate" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Trạng thái hợp đồng</label>
+                                <select class="form-control" id="ContractStatus" name="ContractStatus">
+                                    <option>Đang hiệu lực</option>
+                                    <option>Chưa hiệu lực</option>
+                                    <option>Huỷ bỏ</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Huỷ</button>
+                            <button type="submit" class="btn btn-primary">Xác nhận</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

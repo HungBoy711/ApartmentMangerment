@@ -1,0 +1,68 @@
+<div class="modal fade" id="editCitizenModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form action="/edit-Citizen" method="POST">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Sửa thông tin cư dân</div>
+                        </div>
+                        <div class="card-body">
+                            <div style="display: none;" class="form-group">
+                                <label>id</label>
+                                <input name="ID" id="ID" type=" text" class="form-control" value="">
+                            </div>
+                            <div class="form-group">
+                                <label for="CitizenID">Mã cư dân</label>
+                                <input type="text" name="CitizenID" id="CitizenID" class="form-control" value="">
+                            </div>
+                            <div class="form-group">
+                                <label for="ApartID">Số phòng</label>
+                                <input type="text" name="ApartID" id="ApartID" class="form-control" value="">
+                            </div>
+                            <div class="form-group">
+                                <label>Quan hệ</label>
+                                <select class="form-control" name="Relationship" id="Relationship">
+
+                                    <option>Chủ căn hộ</option>
+                                    <option>Thành viên căn hộ</option>
+                                </select>
+                            </div>
+                            <div class="form-group ">
+                                <label for="Name">Họ và tên</label>
+                                <input type="text" name="Name" id="Name" class="form-control" value="">
+                            </div>
+                            <div class="form-group ">
+                                <label for="BirthDay">Ngày sinh</label>
+                                <input type="date" name="BirthDay" id="BirthDay" class="form-control">
+                            </div>
+                            <div class="form-check">
+                                <label>GiớI tính</label><br />
+                                <select class="form-control" name="Gender" id="Gender">
+                                    <option>Nam</option>
+                                    <option>Nữ</option>
+                                </select>
+                            </div>
+                            <div class="form-group ">
+                                <label for="Hometown">Quê quán</label>
+                                <input type="text" name="Hometown" id="Hometown" class="form-control" value="">
+                            </div>
+                            <div class="form-group ">
+                                <label for="Phone">Số điện thoại</label>
+                                <input type="text" name="Phone" id="Phone" class="form-control" value=">">
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                            <button type="submit" class="btn btn-primary">Xác nhận</button>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</html>

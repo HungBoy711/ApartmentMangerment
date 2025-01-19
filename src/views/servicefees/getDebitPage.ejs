@@ -1,0 +1,141 @@
+<body>
+    <div class="wrapper">
+        <div class="main-header">
+            <%- include('../layouts/index.ejs') %>
+                <div class="main-panel">
+                    <div class="content">
+                        <div class="container-fluid">
+                            <div class="card shadow-sm my-5">
+                                <div class="card-header bg-primary text-white text-center">
+                                    <h4>Ghi nợ hoá đơn</h4>
+                                </div>
+                                <form action="/debit" method="post">
+                                    <div class="card-body">
+                                        <div class="container">
+                                            <ul class="list-unstyled">
+                                                <li>
+                                                    Mã hoá đơn: <input type="text" class="text-black border-0"
+                                                        name="ServiceFeeID" value="<%= servicefee.ServiceFeeID %>">
+                                                </li>
+                                                <li>
+                                                    Chủ sở hữu: <input type="text" class="text-black border-0"
+                                                        name="Owner" value="<%= servicefee.Owner %>">
+                                                </li>
+                                                <li>
+                                                    Căn hộ: <input type="text" class="text-black border-0"
+                                                        name="ApartID" value="<%= servicefee.ApartID %>">
+                                                </li>
+                                                <li>
+                                                    Ngày thanh toán: <input readonly type="date"
+                                                        class="text-black border-0" name="PaymentDate" id="PaymentDate">
+                                                </li>
+                                                <li>
+                                                    Thanh toán hóa đơn tháng: <input type="month" class="text-black"
+                                                        name="PaymentMonth" value="<%= servicefee.PaymentMonth %>">
+                                                </li>
+                                            </ul>
+                                            <hr>
+                                            <div class="row mt-4">
+                                                <div class="col-md-10">
+                                                    <p>Phí đậu xe</p>
+                                                </div>
+                                                <div class="col-md-2 text-end">
+                                                    <input type="text" class="text-black border-0" name="ParkingFee"
+                                                        id="ParkingFee" value="<%= servicefee.ParkingFee %>"> VND
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-md-10">
+                                                    <p>Phí rác</p>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <input type="text" class="text-black border-0" name="GarbageFee"
+                                                        id="GarbageFee" value="<%= servicefee.GarbageFee %>"> VND
+                                                </div>
+                                            </div>
+                                            <hr>
+
+                                            <div class="row">
+                                                <div class="col-md-10">
+                                                    <p>Phí môi trường</p>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <input type="text" class="text-black border-0"
+                                                        name="EnvironmentalFee" id="EnvironmentalFee"
+                                                        value="<%= servicefee.EnvironmentalFee %>"> VND
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="row ">
+                                                <div class="col-md-9">
+                                                    <p>Mô tả</p>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <textarea name="Description" rows="4" cols="30"></textarea>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="row ">
+                                                <div class="col-md-9">
+                                                    <p>Số tiền nợ</p>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <input type="number" name="AmountOwed" value="0">
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <hr style="border: 1px solid black;">
+                                            <div style="margin-left: 75%;" class="row text-black mt-4">
+                                                <div class="col-xl-12 ">
+                                                    Tổng cộng: <input type="text" class="text-black border-0 w-25"
+                                                        name="TotalFee" id="TotalFee">VND
+                                                </div>
+                                            </div>
+                                            <hr style="border: 1px solid black;">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                            onclick="history.back()">Huỷ</button>
+                                        <button type="submit" class="btn btn-primary">Xác nhận</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</body>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const date = new Date();
+        let day = String(date.getDate()).padStart(2, '0');
+        let month = String(date.getMonth() + 1).padStart(2, '0');
+        let year = date.getFullYear();
+        let currentDate = `${year}-${month}-${day}`;
+
+        document.getElementById("PaymentDate").value = currentDate;
+
+        const parkingFeeInput = document.getElementById("ParkingFee");
+        const garbageFeeInput = document.getElementById("GarbageFee");
+        const environmentalFeeInput = document.getElementById("EnvironmentalFee");
+        const totalFeeInput = document.getElementById("TotalFee");
+
+        function calculateTotal() {
+            const parkingFee = parseFloat(parkingFeeInput.value) || 0;
+            const garbageFee = parseFloat(garbageFeeInput.value) || 0;
+            const environmentalFee = parseFloat(environmentalFeeInput.value) || 0;
+
+            const total = parkingFee + garbageFee + environmentalFee;
+            totalFeeInput.value = total;
+        }
+
+        parkingFeeInput.addEventListener("input", calculateTotal);
+        garbageFeeInput.addEventListener("input", calculateTotal);
+        environmentalFeeInput.addEventListener("input", calculateTotal);
+
+        calculateTotal();
+    });
+</script>

@@ -1,0 +1,95 @@
+<body>
+    <%- include('../serviceFees/create-ServiceFee') %>
+        <%- include('../serviceFees/set-PaymentTerm') %>
+            <div class="wrapper">
+                <div class="main-header">
+                    <%- include('../layouts/index.ejs') %>
+                        <div class="main-panel">
+                            <div class="content">
+                                <div class="container-fluid">
+                                    <div class="row mb-3">
+                                        <div class="col-md ">
+                                        </div>
+                                        <div class="col-md-6 text-right">
+
+                                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                data-target="#createServiceFeeModal">
+                                                <i class="fa-regular fa-plus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <div class="card-title">Danh sách hoá đơn</div>
+                                                </div>
+                                                <div class="card-body">
+                                                    <table class="table table-hover">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col" style="display: none;">#</th>
+                                                                <th scope="col" class="col-1-5">Tổng phí</th>
+                                                                <th scope="col" class="col-1">Mã hoá đơn</th>
+                                                                <th scope="col" class="col-1">Số căn hộ</th>
+                                                                <th scope="col">Chủ căn hộ</th>
+                                                                <th scope="col" class="col-1-5">Phí trông xe</th>
+                                                                <th scope="col" class="col-1-5">Phí rác</th>
+                                                                <th scope="col" class="col-1-5">Phí môi trường</th>
+
+
+                                                                <th scope="col" class="text-center">Chức năng</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <% listServiceFees.forEach(function(servicefee) { %>
+                                                                <tr>
+                                                                    <td style="display: none;">
+                                                                        <%= servicefee._id %>
+                                                                    </td>
+                                                                    <td>
+                                                                        <%= servicefee.TotalFee %> VND
+                                                                    </td>
+                                                                    <td>
+                                                                        <%= servicefee.ServiceFeeID %>
+                                                                    </td>
+                                                                    <td>
+                                                                        <%= servicefee.ApartID %>
+                                                                    </td>
+                                                                    <td>
+                                                                        <%= servicefee.Owner %>
+                                                                    </td>
+
+                                                                    <td>
+                                                                        <%= servicefee.ParkingFee %> VND
+                                                                    </td>
+                                                                    <td>
+                                                                        <%= servicefee.GarbageFee %> VND
+                                                                    </td>
+                                                                    <td>
+                                                                        <%= servicefee.EnvironmentalFee %> VND
+                                                                    </td>
+
+
+
+                                                                    <td class="text-center">
+                                                                        <a href="/get-DebitPage/<%= servicefee._id %>"
+                                                                            type="button" class="btn btn-primary ">
+                                                                            Ghi nợ
+                                                                        </a>
+                                                                    </td>
+
+                                                                </tr>
+                                                                <% }); %>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+</body>

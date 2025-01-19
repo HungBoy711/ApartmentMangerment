@@ -1,0 +1,28 @@
+<div class="modal fade" id="deleteApartmentModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form action="/delete-Apartment" method="POST">
+                    <input type="hidden" id="ID" name="ID">
+                    <div>
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Xoá căn hộ</h5>
+                                </div>
+                                <div class="modal-body">
+                                    Bạn có chắc chắn muốn xoá căn hộ <input style="border: none;" type="text"
+                                        id="ApartID">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                                    <button type="submit" class="btn btn-danger">Xác nhận</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

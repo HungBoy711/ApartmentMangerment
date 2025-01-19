@@ -1,0 +1,91 @@
+<body>
+    <div class="wrapper">
+        <div class="main-header">
+            <%- include('../layouts/index.ejs') %>
+                <div class="main-panel">
+                    <div class="content">
+                        <div class="container-fluid">
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <input class="btn btn-secondary" type="button" value="Quay lại"
+                                        onclick="history.back()" />
+                                </div>
+                                <div class="col-md-6 text-right">
+                                    <a class="btn btn-primary" style="color: white; text-decoration: none;"
+                                        href="/create-AssetPage">
+                                        <i class="fa-regular fa-plus"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <div class="card-title">Thông tin tài sản</div>
+                                        </div>
+                                        <div class="card-body">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col" style="display: none;">#</th>
+                                                        <th scope="col">Mã tài sản</th>
+                                                        <th scope="col">Mã danh mục</th>
+                                                        <th scope="col">Tên tài sản</th>
+                                                        <th scope="col">Ngày mua</th>
+                                                        <th scope="col">Trạng thái</th>
+                                                        <th scope="col">Vị trí</th>
+                                                        <th scope="col">Nhà cung cấp</th>
+                                                        <th scope="col">Chức năng</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <% listAssets.forEach(function(asset) { %>
+                                                        <tr>
+                                                            <td style="display: none;">
+                                                                <%= asset.id %>
+                                                            </td>
+                                                            <td>
+                                                                <%= asset.AssetID %>
+                                                            </td>
+                                                            <td>
+                                                                <%= asset.AssetCatID %>
+                                                            </td>
+                                                            <td>
+                                                                <%= asset.Name %>
+                                                            </td>
+                                                            <td>
+                                                                <%= asset.PurchaseDate %>
+                                                            </td>
+                                                            <td>
+                                                                <%= asset.Status %>
+                                                            </td>
+                                                            <td>
+                                                                <%= asset.Location %>
+                                                            </td>
+                                                            <td>
+                                                                <%= asset.Supplier %>
+                                                            </td>
+                                                            <td style="width: 200px;">
+                                                                <a href="/asset/edit-AssetPage/<%= asset.id %>"><i
+                                                                        class="fa-solid fa-pencil"></i></a>
+                                                                <a style="margin-left: 20px; color: red;"
+                                                                    href="/asset/delete-AssetPage/<%= asset.id %>">
+                                                                    <i class="fa-solid fa-trash"></i>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                        <% }); %>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+        </div>
+    </div>
+</body>

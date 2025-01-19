@@ -1,0 +1,11 @@
+.delete-btn {
+    background-color: transparent;
+    color: red;
+    border: none;
+}
+
+.edit-btn {
+    background-color: transparent;
+    color: blueviolet;
+    border: none;
+}

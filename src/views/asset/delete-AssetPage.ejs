@@ -1,0 +1,43 @@
+<body>
+    <div class="wrapper">
+        <div class="main-header">
+            <%- include('../layouts/index.ejs') %>
+                <div class="main-panel">
+                    <div class="content">
+
+                        <form action="/delete-Asset" method="POST">
+                            <div>
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Xoá tài sản</h5>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div style="display: none;">
+                                                <input type="text" name="ID" value="<%= asset.id %>">
+                                            </div>
+                                            <div>
+                                                <input style="display: none;" value="<%= asset.AssetCatID %>"
+                                                    name="AssetCatID">
+                                            </div>
+
+                                            <p>
+                                                <%= asset.Name %>
+                                            </p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button onclick="history.back()" type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Hủy</button>
+                                            <button type="submit" class="btn btn-danger ">Xác nhận</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+        </div>
+    </div>
+</body>
+
+</html>

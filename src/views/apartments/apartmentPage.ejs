@@ -1,0 +1,126 @@
+<body>
+    <%- include('../apartments/create-Apartment.ejs') %>
+        <%- include('../apartments/delete-Apartment.ejs') %>
+            <%- include('../apartments/edit-Apartment.ejs') %>
+                <div class="wrapper">
+                    <div class="main-header">
+                        <%- include('../layouts/index.ejs') %>
+                            <div class="main-panel">
+                                <div class="content">
+                                    <div class="container-fluid">
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                            </div>
+                                            <div class="col-md-6 text-right">
+                                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                    data-target="#createModal">
+                                                    <i class="fa-regular fa-plus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <div class="card-title">Thông tin căn hộ</div>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <table class="table table-hover">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th scope="col" style="display: none;">#</th>
+                                                                    <th scope="col">Số căn hộ</th>
+                                                                    <th scope="col">Tầng</th>
+                                                                    <th scope="col">số người ở</th>
+                                                                    <th scope="col">Trạng thái</th>
+                                                                    <th scope="col">Diện tích</th>
+                                                                    <th scope="col" class="col-3">Chức năng</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <% listApartments.forEach(function(apartment) { %>
+                                                                    <tr>
+                                                                        <td style="display: none;">
+                                                                            <%= apartment.id %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= apartment.ApartID %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= apartment.CitizenCount %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= apartment.Floor %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= apartment.Status %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= apartment.Size %> m2
+                                                                        </td>
+                                                                        <td style="width: 200px;">
+                                                                            <a class="btn btn-primary"
+                                                                                style="color: white;text-decoration: none; margin-right: 20px; "
+                                                                                href="/apartmentDetail/<%= apartment.ApartID %>">Chi
+                                                                                tiết</a>
+                                                                            <button class="edit-btn" data-toggle="modal"
+                                                                                data-target="#editApartmentModal"
+                                                                                data-id="<%= apartment.id %>"
+                                                                                data-apartid="<%= apartment.ApartID %>"
+                                                                                data-citizencount="<%= apartment.CitizenCount %>"
+                                                                                data-floor="<%= apartment.Floor %>"
+                                                                                data-status="<%= apartment.Status %>"
+                                                                                data-size="<%= apartment.Size %>">
+                                                                                <i class="fa-solid fa-pencil"></i>
+                                                                            </button>
+                                                                            <button class="delete-btn"
+                                                                                data-toggle="modal"
+                                                                                data-target="#deleteApartmentModal"
+                                                                                data-id="<%= apartment.id %>"
+                                                                                data-apartid="<%= apartment.ApartID %>">
+                                                                                <i class="fa-solid fa-trash"></i>
+                                                                            </button>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <% }); %>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="card-footer">
+                                                        <ul class="pagination d-flex justify-content-center">
+                                                            <% if (currentPage> 1) { %>
+                                                                <li class="page-item">
+                                                                    <a class="page-link"
+                                                                        href="?page=<%= currentPage - 1 %>&limit=8">Trước</a>
+                                                                </li>
+                                                                <% } %>
+                                                                    <% for (let i=1; i <=totalPages; i++) { %>
+                                                                        <li
+                                                                            class="page-item <%= i === currentPage ? 'active' : '' %>">
+                                                                            <a class="page-link"
+                                                                                href="?page=<%= i %>&limit=8">
+                                                                                <%= i %>
+                                                                            </a>
+                                                                        </li>
+                                                                        <% } %>
+                                                                            <% if (currentPage < totalPages) { %>
+                                                                                <li class="page-item">
+                                                                                    <a class="page-link"
+                                                                                        href="?page=<%= currentPage + 1 %>&limit=8">Tiếp</a>
+                                                                                </li>
+                                                                                <% } %>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                    </div>
+                </div>
+</body>
+<script src="/js/getDataApartment.js"></script>
+
+</html>

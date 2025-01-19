@@ -1,0 +1,94 @@
+<body>
+    <div class="wrapper">
+        <div class="main-header">
+            <%- include('../layouts/index.ejs') %>
+                <div class="main-panel">
+                    <div class="content">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <form action="/create-Asset" method="POST">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <div class="card-title">Thêm mới tài sản</div>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="form-group">
+                                                    <label for="AssetID">Mã tài sản</label>
+                                                    <input type="text" name="AssetID" class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="AssetCatID">Mã danh mục</label>
+                                                    <input type="text" name="AssetCatID" class="form-control">
+                                                </div>
+                                                <div class="form-group ">
+                                                    <label for="Name">Tên tài sản</label>
+                                                    <input type="text" name="Name" class="form-control">
+                                                </div>
+                                                <div class="form-group ">
+                                                    <label>Ngày mua</label>
+                                                    <input type="date" name="PurchaseDate" class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Trạng thái</label>
+                                                    <select class="form-control" name="Status">
+                                                        <option>Đang sử dụng</option>
+                                                        <option>Bảo trì</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group ">
+                                                    <label>Vị trí</label>
+                                                    <input type="text" name="Location" class="form-control">
+                                                </div>
+                                                <div class="form-group ">
+                                                    <label>Nhà cung cấp</label>
+                                                    <input type="text" name="Supplier" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="card-action">
+                                                <button type="submit" class="btn btn-success">Xác nhận</button>
+
+                                                <input class="btn btn-secondary" type="button" value="Hủy"
+                                                    onclick="history.back()" />
+
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <footer class="footer">
+                        <div class="container-fluid">
+                            <nav class="pull-left">
+                                <ul class="nav">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="http://www.themekita.com">
+                                            ThemeKita
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">
+                                            Help
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">
+                                            Licenses
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                            <div class="copyright ml-auto">
+                                2018, made with <i class="la la-heart heart text-danger"></i> by <a
+                                    href="http://www.themekita.com">ThemeKita</a>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<div class="modal fade" id="createServiceFeeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form action="/create-ServiceFee" method="POST">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Thêm mới hoá đơn dịch vụ</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>Mã hoá đơn</label>
+                                <input type="text" name="ServiceFeeID" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Số căn hộ</label>
+                                <input type="text" name="ApartID" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Chủ sỡ hữu</label>
+                                <input type="text" name="Owner" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Phí gửi xe</label>
+                                <input type="number" name="ParkingFee" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Phí rác</label>
+                                <input type="number" name="GarbageFee" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Phí môi trường</label>
+                                <input type="number" name="EnvironmentalFee" class="form-control">
+                            </div>
+                            <input style="display: none" ; name="Status" value="Chưa thanh toán">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Huỷ</button>
+                            <button type="submit" class="btn btn-primary">Xác nhận</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

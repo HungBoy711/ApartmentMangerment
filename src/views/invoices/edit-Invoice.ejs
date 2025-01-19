@@ -1,0 +1,46 @@
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form action="/edit-Invoice" method="POST"> <!-- Update the action URL if needed -->
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Sửa hoá đơn</div>
+                        </div>
+                        <div class="card-body">
+                            <input type="hidden" id="ID" name="ID" value="">
+                            <div class="form-group">
+                                <label>Mã hoá đơn</label>
+                                <input type="text" id="InvoiceID" name="InvoiceID" class="form-control" value="">
+                            </div>
+                            <div class="form-group">
+                                <label>Mã hợp đồng</label>
+                                <input type="text" id="ContractID" name="ContractID" class="form-control" value="">
+                            </div>
+                            <div class="form-group">
+                                <label>Kỳ hạn thanh toán </label>
+                                <input type="date" id="PaymentTerm" name="PaymentTerm" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Phí căn hộ (VND)</label>
+                                <input type="number" id="ApartmentFee" name="ApartmentFee" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Phí điện (VND)</label>
+                                <input type="number" id="ElectricityFee" name="ElectricityFee" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Phí nước (VND)</label>
+                                <input type="number" id="WaterFee" name="WaterFee" class="form-control">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Huỷ</button>
+                            <button type="submit" class="btn btn-primary">Xác nhận</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

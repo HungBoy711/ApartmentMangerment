@@ -1,0 +1,158 @@
+<script src="/js/searchCitizen.js"></script>
+
+<body>
+    <%- include('../citizens/create-Citizen.ejs') %>
+        <%- include('../citizens/edit-Citizen.ejs') %>
+            <%- include('../citizens/delete-Citizen.ejs') %>
+                <div class="wrapper">
+                    <div class="main-header">
+                        <%- include('../layouts/index.ejs') %>
+                            <div class="main-panel">
+                                <div class="content">
+                                    <div class="container-fluid">
+                                        <div class="row mb-3">
+                                            <div class="col-md-6" style="margin-bottom: -1%;">
+                                                <form id="searchForm" action="/citizenSearch" method="POST"
+                                                    onsubmit="updateAction()">
+                                                    <div style="width: 400px;" class="input-group">
+                                                        <select id="searchType" class="form-control"
+                                                            onchange="updatePlaceholder()">
+                                                            <option value="citizen">Tìm theo tên</option>
+                                                            <option value="room">Tìm theo phòng</option>
+                                                        </select>
+                                                        <input id="searchInput" name="data" type="text"
+                                                            class="form-control" placeholder="Tìm dân cư">
+                                                        <div class="input-group-append">
+                                                            <button class="btn btn-primary" type="submit">
+                                                                <i class="fa fa-search"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="col-md-6 text-right">
+                                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                    data-target="#createCitizenModal">
+                                                    <i class="fa-regular fa-plus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <div class="card-title">Thông tin dân cư</div>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <table class="table table-hover">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th scope="col" style="display: none;">#</th>
+                                                                    <th scope="col">Mã dân cư</th>
+                                                                    <th scope="col">Số căn hộ</th>
+                                                                    <th scope="col">Họ và tên</th>
+                                                                    <th scope="col">quan hệ</th>
+                                                                    <th scope="col">Ngày sinh</th>
+                                                                    <th scope="col">Giới tính</th>
+                                                                    <th scope="col">Quê hương</th>
+                                                                    <th scope="col">Số điện thoại</th>
+                                                                    <th scope="col">Chức năng</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <% listCitizens.forEach(function(citizen) { %>
+                                                                    <tr>
+                                                                        <td style="display: none;">
+                                                                            <%= citizen._id %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= citizen.CitizenID %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= citizen.ApartID %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= citizen.Name %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= citizen.relationship %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= citizen.BirthDay.toLocaleDateString() %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= citizen.Gender %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= citizen.Hometown %>
+                                                                        </td>
+                                                                        <td>
+                                                                            0<%= citizen.Phone %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <button class="edit-btn" data-toggle="modal"
+                                                                                data-target="#editCitizenModal"
+                                                                                data-id="<%= citizen._id %>"
+                                                                                data-citizenid="<%= citizen.CitizenID %>"
+                                                                                data-apartid="<%= citizen.ApartID %>"
+                                                                                data-name="<%= citizen.Name %>"
+                                                                                data-relationship="<%= citizen.relationship %>"
+                                                                                data-birthday="<%= citizen.BirthDay %>"
+                                                                                data-gender="<%= citizen.Gender %>"
+                                                                                data-hometown="<%= citizen.Hometown %>"
+                                                                                data-phone="<%= citizen.Phone %>">
+                                                                                <i class="fa-solid fa-pencil"></i>
+                                                                            </button>
+
+                                                                            <button class="delete-btn"
+                                                                                data-toggle="modal"
+                                                                                data-target="#deleteCitizenModal"
+                                                                                data-id="<%= citizen._id %>"
+                                                                                data-apartid="<%= citizen.ApartID %>"
+                                                                                data-name="<%= citizen.Name %>">
+                                                                                <i class="fa-solid fa-trash"></i>
+                                                                            </button>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <% }); %>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="card-footer">
+                                                        <ul class="pagination d-flex justify-content-center">
+                                                            <% if (currentPage> 1) { %>
+                                                                <li class="page-item">
+                                                                    <a class="page-link"
+                                                                        href="?page=<%= currentPage - 1 %>&limit=5">Trước</a>
+                                                                </li>
+                                                                <% } %>
+                                                                    <% for (let i=1; i <=totalPages; i++) { %>
+                                                                        <li
+                                                                            class="page-item <%= i === currentPage ? 'active' : '' %>">
+                                                                            <a class="page-link"
+                                                                                href="?page=<%= i %>&limit=5">
+                                                                                <%= i %>
+                                                                            </a>
+                                                                        </li>
+                                                                        <% } %>
+                                                                            <% if (currentPage < totalPages) { %>
+                                                                                <li class="page-item">
+                                                                                    <a class="page-link"
+                                                                                        href="?page=<%= currentPage + 1 %>&limit=5">Tiếp</a>
+                                                                                </li>
+                                                                                <% } %>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                    </div>
+                </div>
+</body>
+<script src="/js/getDataCitizen.js"></script>
+
+</html>

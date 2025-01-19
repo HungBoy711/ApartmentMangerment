@@ -1,0 +1,50 @@
+<div class="modal fade" id="createUserModal" tabindex="-1" aria-labelledby="createUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form action="/create-User" method="POST">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Thêm mới người dùng</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>Tên người dùng</label>
+                                <input type="text" name="Username" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" name="Email" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Vai trò</label>
+                                <select class="form-control" name="Role" required>
+                                    <option value="">Chọn vai trò</option>
+                                    <option>Admin</option>
+                                    <option>Người dùng</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Giới tính</label>
+                                <select class="form-control" name="Gender" required>
+                                    <option value="">Chọn giới tính</option>
+                                    <option>Nam</option>
+                                    <option>Nữ</option>
+                                    <option>Khác</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Số điện thoại</label>
+                                <input type="text" name="Phone" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Huỷ</button>
+                            <button type="submit" class="btn btn-primary">Xác nhận</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

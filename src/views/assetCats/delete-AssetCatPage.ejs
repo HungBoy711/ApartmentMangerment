@@ -1,0 +1,38 @@
+<body>
+    <div class="wrapper">
+        <div class="main-header">
+            <%- include('../layouts/index.ejs') %>
+                <div class="main-panel">
+                    <div class="content">
+
+                        <form action="/delete-AssetCat" method="POST">
+                            <div>
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Xoá danh mục</h5>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div style="display: none;">
+                                                <input type="text" name="ID" value="<%= assetCat.id %>">
+                                            </div>
+                                            <p>
+                                                <%= assetCat.Name %>
+                                            </p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button onclick="history.back()" type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Hủy</button>
+                                            <button type="submit" class="btn btn-danger ">Xác nhận</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+        </div>
+    </div>
+</body>
+
+</html>

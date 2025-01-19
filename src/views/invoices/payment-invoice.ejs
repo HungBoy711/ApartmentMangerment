@@ -1,0 +1,56 @@
+<div class="modal fade" id="paymentModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form action="/payment-Invoice" method="POST">
+                    <input type="hidden" id="ID" name="ID" value="">
+                    <div>
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Thanh toán hoá đơn</h5>
+                                </div>
+                                <div class="modal-body">
+                                    <input type="hidden" id="InvoiceID" name="InvoiceID" value="">
+                                    <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                                        <span>Xác nhận thanh toán hoá đơn kỳ hạn</span>
+                                        <input style="border: none; margin-left: 10px;" type="text" id="PaymentTerm"
+                                            name="PaymentTerm" readonly>
+                                    </div>
+                                    <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                                        <span>Căn hộ:</span>
+                                        <input style="border: none; margin-left: 10px;" type="text" id="ApartNumber"
+                                            name="ApartNumber" readonly>
+                                    </div>
+                                    <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                                        <span>Chủ sở hữu:</span>
+                                        <input style="border: none; margin-left: 10px;" type="text" id="Owner"
+                                            name="Owner" readonly>
+                                    </div>
+                                    <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                                        <span>Ngày thanh toán:</span>
+                                        <input style="border: none; margin-left: 10px;" type="text" id="PaymentDate"
+                                            name="PaymentDate" readonly>
+                                    </div>
+                                    <input style="display: none;" id="ApartmentFee" name="ApartmentFee">
+                                    <input style="display: none;" id="ElectricityFee" name="ElectricityFee">
+                                    <input style="display: none;" id="WaterFee" name="WaterFee">
+                                    <input style="display: none;" id="Total" name="Total">
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                                    <button type="submit" class="btn btn-danger">Xác nhận</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+
+</script>
