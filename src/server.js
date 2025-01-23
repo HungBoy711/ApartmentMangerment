@@ -46,18 +46,18 @@ const client = new MongoClient(process.env.DB_HOST_ATLAS, {
     }
 });
 
-async function run() {
+const run = async () => {
     try {
         await client.connect();
         await client.db("Apartments").command({ ping: 1 });
         console.log("Success mongodb atlas atlas");
         app.listen(port, hostname, () => {
             console.log(`Web running succeed on port ${port}`);
-        })
+        });
     } finally {
-
     }
-}
+};
+
 run().catch(console.dir);
 
 
