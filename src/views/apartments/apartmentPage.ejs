@@ -1,90 +1,82 @@
 <%- include('../layouts/index.ejs') %>
     <div class="container">
         <div class="page-inner">
-            <div class="page-header">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal">
+            <div class="page-header mb-2">
+                <h4>Danh sách căn hộ</h4>
+            </div>
+            <div class=" d-flex justify-content-between align-items-center mb-3">
+
+                <form id="searchForm" action="/searchApartmentNumber" method="POST" onsubmit="updateAction()">
+                    <div style="width: 400px;" class="input-group">
+                        <select class="form-select">
+                            <option value="apartment">Tìm theo số căn hộ</option>
+                            <option value="owner">Tìm theo chủ căn hộ</option>
+                        </select>
+                        <input id="searchInput" name="data" type="text" class="form-control" placeholder="...">
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+                <a class="btn btn-primary" href="/createApartmentPage">
                     <i class="fa-regular fa-plus"></i>
-                </button>
+                </a>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="d-flex align-items-center">
-
-                                <h3 class="fw-bold mb-3">Danh sách căn hộ</h3>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table id="add-row" class=" table table-bordered table-hover ">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col" style="display: none;">#</th>
-                                            <th scope="col">Số căn hộ</th>
-                                            <th scope="col">Tầng</th>
-                                            <th scope="col">số người ở</th>
-                                            <th scope="col">Trạng thái</th>
-                                            <th scope="col">Diện tích</th>
-                                            <th scope="col" class="col-3">Chức năng</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <% listApartments.forEach(function(apartment) { %>
-                                            <tr>
-                                                <td style="display: none;">
-                                                    <%= apartment.id %>
-                                                </td>
-                                                <td>
-                                                    <%= apartment.ApartID %>
-                                                </td>
-                                                <td>
-                                                    <%= apartment.CitizenCount %>
-                                                </td>
-                                                <td>
-                                                    <%= apartment.Floor %>
-                                                </td>
-                                                <td>
-                                                    <%= apartment.Status %>
-                                                </td>
-                                                <td>
-                                                    <%= apartment.Size %> m2
-                                                </td>
-                                                <td style="width: 200px;">
-                                                    <a class="btn btn-primary"
-                                                        style="color: white;text-decoration: none; margin-right: 20px; "
-                                                        href="/apartmentDetail/<%= apartment.ApartID %>">Chi
-                                                        tiết</a>
-                                                    <button class="edit-btn" data-toggle="modal"
-                                                        data-target="#editApartmentModal" data-id="<%= apartment.id %>"
-                                                        data-apartid="<%= apartment.ApartID %>"
-                                                        data-citizencount="<%= apartment.CitizenCount %>"
-                                                        data-floor="<%= apartment.Floor %>"
-                                                        data-status="<%= apartment.Status %>"
-                                                        data-size="<%= apartment.Size %>">
-                                                        <i class="fa-solid fa-pencil"></i>
-                                                    </button>
-                                                    <button class="delete-btn" data-toggle="modal"
-                                                        data-target="#deleteApartmentModal"
-                                                        data-id="<%= apartment.id %>"
-                                                        data-apartid="<%= apartment.ApartID %>">
-                                                        <i class="fa-solid fa-trash"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <% }); %>
-                                    </tbody>
-                                </table>
-                                <div class="d-flex justify-content-center mt-4">
-                                    <!-- phan trang -->
-                                </div>
-                            </div>
-                        </div>
+                    <div class="table-responsive">
+                        <table id="add-row" class="table table-hover text-center">
+                            <thead class="table-success">
+                                <tr>
+                                    <th scope="col" style="display: none;">#</th>
+                                    <th scope="col">Số căn hộ</th>
+                                    <th scope="col">Tầng</th>
+                                    <th scope="col">Số lượng phòng</th>
+                                    <th scope="col">Trạng thái</th>
+                                    <th scope="col">Diện tích</th>
+                                    <th scope="col" class="col-3">Chức năng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% listApartments.forEach(function(apartment) { %>
+                                    <tr>
+                                        <td style="display: none;">
+                                            <%= apartment.id %>
+                                        </td>
+                                        <td>
+                                            <%= apartment.ApartID %>
+                                        </td>
+                                        <td>
+                                            <%= apartment.Floor %>
+                                        </td>
+                                        <td>
+                                            <%= apartment.TotalRoom %>
+                                        </td>
+                                        <td>
+                                            <%= apartment.Status %>
+                                        </td>
+                                        <td>
+                                            <%= apartment.Size %> m2
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-primary"
+                                                style="color: white; text-decoration: none; margin-right: 10px;"
+                                                href="/apartmentDetail/<%= apartment.ApartID %>">Chi tiết</a>
+                                            <button class="border-0 bg-transparent">
+                                                <i class="fa-solid fa-pencil" style="color: #1572e8;"></i>
+                                            </button>
+                                            <button class="delete-btn border-0 bg-transparent" data-toggle="modal"
+                                                data-target="#deleteApartmentModal" data-id="<%= apartment.id %>"
+                                                data-apartid="<%= apartment.ApartID %>">
+                                                <i class="fa-solid fa-trash" style="color: red;"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <% }); %>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    </div>
-    </div>
     </div>

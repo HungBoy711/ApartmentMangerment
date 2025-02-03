@@ -22,6 +22,20 @@ const getApartmentPage = async (req, res) => {
     }
 
 }
+const searchApartmentNumber = async (req, res) => {
+    let name = req.body.data;
+    try {
+        if (!name || name.trim() === '') {
+            return res.redirect('/apartment');
+        }
+        const listApartments = await Apartment.find({ ApartID: name });
+        return res.render('apartments/apartmentPage.ejs', {
+            listApartments: listApartments,
+        });
+    } catch (error) {
+        res.status(400).json({ message: 'Lỗi dữ liệu tìm kiếm' });
+    }
+};
 const getApartmentDetail = async (req, res) => {
     try {
         let apartID = req.params.ApartID;
@@ -31,22 +45,31 @@ const getApartmentDetail = async (req, res) => {
         console.log(error)
         res.status(400).json({ message: 'Lỗi không tìm thấy dữ liệu' });
     }
-
 }
 
+const createApartmentPage = async (req, res) => {
+    const errorID = null
+    return res.render('apartments/createApartment.ejs', { errorID: errorID })
+}
 const createApartment = async (req, res) => {
     try {
+        let { ApartID, TotalRoom, Floor, Status, Size } = req.body;
+        const apartmentID = await Apartment.findOne({ ApartID })
+        if (!apartmentID) {
+            await Apartment.create({
+                ApartID,
+                TotalRoom,
+                Floor,
+                Status,
+                Size,
+            });
+            res.status(200).redirect(`/apartment`);
 
-        let { currentPage, ApartID, CitizenCount, Floor, Status, Size } = req.body;
-        console.log(currentPage)
-        await Apartment.create({
-            ApartID,
-            CitizenCount,
-            Floor,
-            Status,
-            Size,
-        });
-        res.status(200).redirect(`/apartment`);
+        }
+        else {
+            const errorID = " Số căn hộ bị trùng, mời nhập lại!"
+            return res.render('apartments/createApartment.ejs', { errorID: errorID })
+        }
     } catch (error) {
         console.log(error);
         res.status(400).json({ message: 'Lỗi dữ liệu không hợp lệ' });
@@ -87,6 +110,7 @@ const deleteApartment = async (req, res) => {
 
 module.exports = {
     getApartmentPage, getApartmentDetail,
+    createApartmentPage,
     editApartment, createApartment,
-    deleteApartment
+    deleteApartment, searchApartmentNumber
 }
