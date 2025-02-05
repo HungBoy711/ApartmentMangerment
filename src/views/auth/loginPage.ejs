@@ -2,54 +2,96 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-    <!-- Bootstrap 4 CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Hệ thống quản lý siêu thị</title>
+    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+
+    <!-- Fonts and icons -->
+    <script src="../assets/js/plugin/webfont/webfont.min.js"></script>
+    <script>
+        WebFont.load({
+            google: {
+                families: ["Public Sans:300,400,500,600,700"]
+            },
+            custom: {
+                families: ["Font Awesome 5 Solid", "Font Awesome 5 Regular",
+                    "Font Awesome 5 Brands", "simple-line-icons",],
+                urls: ["../assets/css/fonts.min.css"],
+            },
+            active: function () {
+                sessionStorage.fonts = true;
+            },
+        });
+    </script>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/css/plugins.min.css" />
+    <link rel="stylesheet" href="../assets/css/kaiadmin.min.css" />
+
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link rel="stylesheet" href="../assets/css/demo.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+
+
 </head>
-<style>
-    body {
-        background-image: url('/images/1.jpg');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        height: 100vh;
-        margin: 0;
-    }
 
-    .card {
-        background-color: rgba(255, 255, 255, 0.9);
-    }
-</style>
+<body>
+    <!-- Section: Design Block -->
+    <section class="vh-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-7 px-0 d-none d-sm-block">
+                    <img src="images/VinhCity.jpeg" alt="Login image" class="w-100 vh-100"
+                        style="object-fit: cover; object-position: left;">
+                </div>
+                <div class="col-sm-5 text-black d-flex justify-content-center align-items-center vh-100"
+                    style="background-color: white;">
+                    <div class="d-flex flex-column align-items-center justify-content-center h-100 w-75">
+                        <div>
+                            <h3>HỆ THỐNG QUẢN LÝ HỘ CHUNG CƯ</h3>
+                        </div>
 
-<body class="bg-light">
+                        <form action="/login" method="POST" class="w-100">
+                            <div class="form-group">
+                                <label for="username">Tên người dùng</label>
+                                <input type="text" class="form-control" id="username" name="Username" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Mật khẩu</label>
+                                <input type="password" class="form-control" id="password" name="Password" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="role">Vai trò</label>
+                                <select class="form-control" id="role" name="Role" required>
+                                    <option value="admin">Quản trị viên</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-block mt-3">Đăng nhập</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
 
-    <div class="container d-flex justify-content-center align-items-center vh-100">
-        <div class="card p-4 shadow-lg" style="width: 100%; max-width: 400px;">
-            <h3 class="card-title text-center mb-4">Đăng nhập</h3>
-            <form action="/login" method="POST">
-                <div class="form-group">
-                    <label for="username">Tên người dùng</label>
-                    <input type="text" class="form-control" id="username" name="Username" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Mật khẩu</label>
-                    <input type="password" class="form-control" id="password" name="Password" required>
-                </div>
-                <div class="form-group">
-                    <label for="role">Vai trò</label>
-                    <select class="form-control" id="role" name="Role" required>
-                        <option value="admin">Quản trị viên</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
-            </form>
-            <p class="text-center mt-3">
-                <a href="/loginCitizen">Đăng nhập với tư cách cư dân</a>
-            </p>
+            </div>
         </div>
-    </div>
+    </section>
+
+    <!-- Section: Design Block -->
+    <!-- Core JS Files -->
+    <script src="../assets/js/core/jquery-3.7.1.min.js"></script>
+    <script src="../assets/js/core/popper.min.js"></script>
+    <script src="../assets/js/core/bootstrap.min.js"></script>
+
+    <!-- jQuery Scrollbar -->
+    <script src="../assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+    <!-- Datatables -->
+    <script src="../assets/js/plugin/datatables/datatables.min.js"></script>
+    <!-- Kaiadmin JS -->
+    <script src="../assets/js/kaiadmin.min.js"></script>
+    <!-- Kaiadmin DEMO methods, don't include it in your project! -->
+    <script src="../assets/js/setting-demo2.js"></script>
 
 </body>
 
