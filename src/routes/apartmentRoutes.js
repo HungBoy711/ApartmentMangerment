@@ -8,11 +8,11 @@ const { getApartmentPage, getApartmentDetail,
     = require('../controllers/apartmentController')
 
 router.get('/', verifyToken, getApartmentPage)
-router.get('/apartmentDetail/:ApartID', verifyToken, getApartmentDetail)
 router.get('/createApartmentPage', verifyToken, createApartmentPage)
-router.post('/createApartment', verifyToken, createApartment)
 router.get('/editApartmentPage/:ApartID', verifyToken, editApartmentPage)
-router.post('/edit-Apartment', verifyToken, editApartment)
+router.get('/:ApartID', verifyToken, getApartmentDetail)
+router.post('/createApartment', verifyToken, createApartment)
+router.post('/editApartment', verifyToken, editApartment)
 router.post('/deleteApartment', verifyToken, deleteApartment)
 router.post('/searchApartmentNumber', verifyToken, searchApartmentNumber)
 

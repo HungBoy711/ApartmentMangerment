@@ -1,9 +1,9 @@
 <%- include('../layouts/index.ejs') %>
     <div class="container">
         <div class="page-inner">
-            <button class="btn btn-light rounded-2 border-1 border-dark " onclick="history.back()">
-                <i class="fa-solid fa-arrow-left-long"></i>
-            </button>
+            <a class="btn btn-light rounded-3  " href="/apartment">
+                <i class=" fa-solid fa-arrow-left-long"></i>
+            </a>
             <div class="page-header">
                 <h3 class="fw-bold mb-0"></h3>
             </div>
@@ -13,28 +13,32 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="card-title">Sửa thông tin căn hộ</div>
-                                <input type="hidden" name="totalPages" value="<%= totalPages %>">
                             </div>
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-6 col-lg-4">
                                         <div class="form-group">
                                             <label>Số căn hộ</label>
-                                            <input required type="number" name="ApartID" class="form-control">
+                                            <input required type="number" name="ApartID" class="form-control"
+                                                value="<%= apartment.ApartID %>" readonly>
                                         </div>
                                         <div class="form-group ">
                                             <label>Tầng</label>
-                                            <input required type="number" name="Floor" class="form-control">
+                                            <input required type="number" name="Floor" class="form-control"
+                                                value="<%= apartment.Floor %>">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-lg-4">
                                         <div class="form-group ">
                                             <label>Số lượng phòng</label>
-                                            <input required type="number" name="TotalRoom" class="form-control">
+                                            <input required type="number" name="TotalRoom" class="form-control"
+                                                value="<%= apartment.TotalRoom %>">
                                         </div>
                                         <div class="form-group">
                                             <label>Trạng thái</label>
                                             <select class="form-select" name="Status">
+                                                <option value="<%= apartment.Status %>">--<%= apartment.Status %>--
+                                                </option>
                                                 <option>Đang ở</option>
                                                 <option>Không sử dụng</option>
                                                 <option>Sửa chữa</option>
@@ -44,13 +48,14 @@
                                     <div class="col-md-6 col-lg-4">
                                         <div class="form-group ">
                                             <label for="Size">Diện tích/m2</label>
-                                            <input required type="number" name="Size" class="form-control">
+                                            <input required type="number" name="Size" class="form-control"
+                                                value="<%=apartment.Size %>">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="card-action">
-                                <button onclick="history.back()" class="btn btn-danger">Huỷ</button>
+                                <a href="/apartment" class="btn btn-danger">Huỷ</a>
                                 <button type="submit" class="btn btn-primary">Xác nhận</button>
                             </div>
                         </div>

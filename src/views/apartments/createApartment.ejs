@@ -1,11 +1,11 @@
 <%- include('../layouts/index.ejs') %>
     <div class="container">
         <div class="page-inner">
-            <% if (messages.error) { %>
+            <% if (messages.errorIdAp) { %>
                 <div class="d-flex justify-content-end">
                     <div class="alert alert-danger alert-dismissible fade show" style="width: 300px;position: fixed;"
                         role="alert">
-                        <%= messages.error %>
+                        <%= messages.errorIdAp %>
                             <button type="button" class="btn-close btn-sm" data-bs-dismiss="alert"
                                 aria-label="Close"></button>
                     </div>
