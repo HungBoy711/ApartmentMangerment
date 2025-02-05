@@ -22,7 +22,7 @@ router.get('/', verifyToken, (req, res) => {
 
 router.use('/', homeRoutes);
 router.use('/', citizenRoutes);
-router.use('/', apartmentRoutes);
+router.use('/apartment', apartmentRoutes);
 router.use('/', assetCatRoutes);
 router.use('/', assetRoutes);
 router.use('/', contractRoutes);

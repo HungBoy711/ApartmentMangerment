@@ -7,10 +7,19 @@ const routes = require('./routes/web')
 const connection = require('./config/database')
 const { MongoClient, ServerApiVersion } = require('mongodb')
 const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const flash = require('connect-flash');
 
 const app = express()
 const port = process.env.PORT || 4000
 const hostname = process.env.HOST_NAME
+
+app.use(session({
+    secret: 'secret-key',
+    resave: false,
+    saveUninitialized: true
+}));
+app.use(flash());
 
 app.use(cookieParser());
 

@@ -14,7 +14,8 @@ const getApartmentPage = async (req, res) => {
         return res.render('apartments/apartmentPage.ejs', {
             listApartments: listApartments,
             currentPage: pagination.page,
-            totalPages: totalPages
+            totalPages: totalPages,
+            messages: req.flash()
         })
     } catch (error) {
         console.log(error)
@@ -31,7 +32,7 @@ const searchApartmentNumber = async (req, res) => {
         const listApartments = await Apartment.find({ ApartID: name });
         return res.render('apartments/apartmentPage.ejs', {
             listApartments: listApartments,
-        });
+        })
     } catch (error) {
         res.status(400).json({ message: 'Lỗi dữ liệu tìm kiếm' });
     }
@@ -40,7 +41,7 @@ const getApartmentDetail = async (req, res) => {
     try {
         let apartID = req.params.ApartID;
         let citizen = await Citizen.find({ ApartID: apartID }).exec();
-        return res.render('apartments/apartmentDetail.ejs', { citizen: citizen })
+        return res.render('apartments/apartmentDetail.ejs', { citizen: citizen, apartID: apartID })
     } catch (error) {
         console.log(error)
         res.status(400).json({ message: 'Lỗi không tìm thấy dữ liệu' });
@@ -48,39 +49,38 @@ const getApartmentDetail = async (req, res) => {
 }
 
 const createApartmentPage = async (req, res) => {
-    const errorID = null
-    return res.render('apartments/createApartment.ejs', { errorID: errorID })
+    return res.render('apartments/createApartment.ejs', { messages: req.flash() });
 }
+
 const createApartment = async (req, res) => {
     try {
         let { ApartID, TotalRoom, Floor, Status, Size } = req.body;
-        const apartmentID = await Apartment.findOne({ ApartID })
-        if (!apartmentID) {
-            await Apartment.create({
-                ApartID,
-                TotalRoom,
-                Floor,
-                Status,
-                Size,
-            });
-            res.status(200).redirect(`/apartment`);
+        const apartmentID = await Apartment.findOne({ ApartID });
 
-        }
-        else {
-            const errorID = " Số căn hộ bị trùng, mời nhập lại!"
-            return res.render('apartments/createApartment.ejs', { errorID: errorID })
+        if (!apartmentID) {
+            await Apartment.create({ ApartID, TotalRoom, Floor, Status, Size });
+            req.flash("success", "Thêm mới căn hộ thành công!");
+            return res.redirect(`/apartment`);
+        } else {
+            req.flash("error", "Lỗi trùng số căn hộ, vui lòng nhập lại!");
+            return res.redirect(`/apartment/createApartmentPage`);
         }
     } catch (error) {
         console.log(error);
-        res.status(400).json({ message: 'Lỗi dữ liệu không hợp lệ' });
+        req.flash("error", "Lỗi dữ liệu không hợp lệ!");
+        return res.redirect(`/apartment`);
     }
 };
 
+const editApartmentPage = async (req, res) => {
+    let ApartID = req.params.ApartID
+    let apartment = await Apartment.findById(ApartID).exec();
+    return res.render('apartments/editApartment.ejs', { apartment: apartment })
+}
 const editApartment = async (req, res) => {
-    let { currentPage, ID, ApartID, CitizenCount, Floor, Status, Size } = req.body;
+    let { currentPage, ApartID, CitizenCount, Floor, Status, Size } = req.body;
     try {
-        await Apartment.updateOne({ _id: ID }, {
-            ApartID: ApartID,
+        await Apartment.updateOne({ ApartID: ApartID }, {
             CitizenCount: CitizenCount,
             Floor: Floor,
             Status: Status,
@@ -95,11 +95,12 @@ const editApartment = async (req, res) => {
 }
 
 const deleteApartment = async (req, res) => {
-    let ID = req.body.ID
+    let ApartID = req.body.ApartID
     try {
         await Apartment.deleteOne({
-            _id: ID
+            ApartID: ApartID
         });
+        req.flash("successDelete", "Xóa căn hộ thành công!")
         res.status(200).redirect('/apartment');
     }
     catch (error) {
@@ -110,7 +111,7 @@ const deleteApartment = async (req, res) => {
 
 module.exports = {
     getApartmentPage, getApartmentDetail,
-    createApartmentPage,
-    editApartment, createApartment,
+    createApartmentPage, createApartment,
+    editApartmentPage, editApartment,
     deleteApartment, searchApartmentNumber
 }

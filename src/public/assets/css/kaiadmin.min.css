@@ -6354,15 +6354,15 @@ label.error {
 }
 
 .btn-warning {
-   background: #ffad46 !important;
-   border-color: #ffad46 !important
+   background: #DFFF00 !important;
+   border-color: #DFFF00 !important
 }
 
 .btn-warning:disabled,
 .btn-warning:focus,
 .btn-warning:hover {
-   background: #ffad46 !important;
-   border-color: #ffad46 !important
+   background: #FFD700 !important;
+   border-color: #FFD700 !important
 }
 
 .btn-danger {

@@ -1,48 +1,61 @@
-<div class="modal fade" id="editApartmentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body">
-                <form action="/edit-Apartment" method="POST">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-title">Sửa thông tin căn hộ</div>
-                        </div>
-                        <div class="card-body">
-                            <input type="hidden" name="currentPage" value="<%= currentPage %>">
-                            <input type="hidden" id="ID" name="ID">
-                            <div class="form-group">
-                                <label for="ApartID">Số căn hộ</label>
-                                <input type="text" name="ApartID" id="ApartID" class="form-control">
+<%- include('../layouts/index.ejs') %>
+    <div class="container">
+        <div class="page-inner">
+            <button class="btn btn-light rounded-2 border-1 border-dark " onclick="history.back()">
+                <i class="fa-solid fa-arrow-left-long"></i>
+            </button>
+            <div class="page-header">
+                <h3 class="fw-bold mb-0"></h3>
+            </div>
+            <div class="row">
+                <form method="POST" action="/apartment/editApartment">
+                    <div class="col-md-12 ">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">Sửa thông tin căn hộ</div>
+                                <input type="hidden" name="totalPages" value="<%= totalPages %>">
                             </div>
-                            <div class="form-group">
-                                <label>Số người ở</label>
-                                <input type="text" name="CitizenCount" id="CitizenCount" class="form-control">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-4">
+                                        <div class="form-group">
+                                            <label>Số căn hộ</label>
+                                            <input required type="number" name="ApartID" class="form-control">
+                                        </div>
+                                        <div class="form-group ">
+                                            <label>Tầng</label>
+                                            <input required type="number" name="Floor" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-4">
+                                        <div class="form-group ">
+                                            <label>Số lượng phòng</label>
+                                            <input required type="number" name="TotalRoom" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Trạng thái</label>
+                                            <select class="form-select" name="Status">
+                                                <option>Đang ở</option>
+                                                <option>Không sử dụng</option>
+                                                <option>Sửa chữa</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-4">
+                                        <div class="form-group ">
+                                            <label for="Size">Diện tích/m2</label>
+                                            <input required type="number" name="Size" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group ">
-                                <label for="Name">Tầng</label>
-                                <input type="text" name="Floor" id="Floor" class="form-control">
+                            <div class="card-action">
+                                <button onclick="history.back()" class="btn btn-danger">Huỷ</button>
+                                <button type="submit" class="btn btn-primary">Xác nhận</button>
                             </div>
-                            <div class="form-group">
-                                <label>Trạng thái</label>
-                                <select class="form-control" name="Status" id="Status">
-                                    <option>Đang sử dụng</option>
-                                    <option>Không sử dụng</option>
-                                    <option>Bảo trì</option>
-                                </select>
-                            </div>
-                            <div class="form-group ">
-                                <label for="Size">Diện tích</label>
-                                <input type="text" name="Size" id="Size" class="form-control">
-                            </div>
-                        </div>
-                        <div class="card-action">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                            <button type="submit" class="btn btn-primary">Xác nhận</button>
                         </div>
                     </div>
                 </form>
             </div>
-
         </div>
     </div>
-</div>
