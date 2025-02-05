@@ -43,7 +43,7 @@ const Login = async (req, res) => {
             message: error.message,
             stack: error.stack
         });
-
+        res.send(error)
     }
 }
 const LoginCitizen = async (req, res) => {
