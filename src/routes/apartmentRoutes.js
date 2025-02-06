@@ -4,7 +4,8 @@ const verifyToken = require('../middleware/authMiddleware');
 const { getApartmentPage, getApartmentDetail,
     editApartment, editApartmentPage,
     createApartmentPage, createApartment,
-    deleteApartment, searchApartmentNumber }
+    deleteApartment, searchApartmentNumber,
+    createCitizen, createCitizenPage }
     = require('../controllers/apartmentController')
 
 router.get('/', verifyToken, getApartmentPage)
@@ -16,5 +17,7 @@ router.post('/editApartment', verifyToken, editApartment)
 router.post('/deleteApartment', verifyToken, deleteApartment)
 router.post('/searchApartmentNumber', verifyToken, searchApartmentNumber)
 
+router.get('/:ApartID/createCitizenPage', verifyToken, createCitizenPage)
+router.post('/:ApartID/createCitizen', verifyToken, createCitizen)
 
 module.exports = router

@@ -68,8 +68,16 @@
                                                 <td>
                                                     <%= apartment.TotalRoom %>
                                                 </td>
+
                                                 <td>
-                                                    <%= apartment.Status %>
+
+                                                    <% if (apartment.Status==='Đang ở' ) { %>
+                                                        <i class="fa-solid fa-circle fa-2xs"
+                                                            style="color: #f25961;"></i>
+                                                        <%= apartment.Status %>
+                                                            <% } else { %>
+                                                                <%= apartment.Status %>
+                                                                    <% } %>
                                                 </td>
                                                 <td>
                                                     <%= apartment.Size %> m2

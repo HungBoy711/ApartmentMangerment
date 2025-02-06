@@ -1,42 +1,83 @@
 <%- include('../layouts/index.ejs') %>
     <div class="container">
         <div class="page-inner">
-            <button class="btn btn-light rounded-2 border-1 border-dark " onclick="history.back()">
-                <i class="fa-solid fa-arrow-left-long"></i>
-            </button>
-
-            <div class="page-header mb-2 d-flex justify-content-between align-items-center">
-                <h4>Thông tin căn hộ <%= apartID %>
-                </h4>
-                <a class="btn btn-primary" href="/createApartmentPage">
-                    <i class="fa-regular fa-plus"></i>
-                </a>
-            </div>
-
-            <div class="row ">
-                <div class="col-md-12 ">
-                    <div class="table-responsive rounded-2">
-                        <table id="add-row" class="table table-head-bg-primary table-hover text-center ">
-                            <thead class="table-success">
-                                <tr>
-                                    <th scope="col" style="display: none;">#</th>
-                                    <th scope="col">Mã dân cư</th>
-                                    <th scope="col">Số căn hộ</th>
-                                    <th scope="col">Họ và tên</th>
-                                    <th scope="col">quan hệ</th>
-                                    <th scope="col">Ngày sinh</th>
-                                    <th scope="col">Giới tính</th>
-                                    <th scope="col">Quê hương</th>
-                                    <th scope="col">Số điện thoại</th>
-                                    <th scope="col">Chức năng</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                            </tbody>
-                        </table>
+            <% if (messages.successAddCitizen) { %>
+                <div class="d-flex justify-content-end">
+                    <div class="alert alert-success alert-dismissible fade show" style="width: 300px; position: fixed;"
+                        role="alert">
+                        <%= messages.successAddCitizen %>
+                            <button type="button" class="btn-close btn-sm" data-bs-dismiss="alert"
+                                aria-label="Close"></button>
                     </div>
                 </div>
-            </div>
+                <% } %>
+                    <a class="btn btn-light rounded-3  " href="/apartment">
+                        <i class=" fa-solid fa-arrow-left-long"></i>
+                    </a>
+                    <div class="page-header mb-2 d-flex justify-content-between align-items-center">
+                        <h4>Thông tin căn hộ <%= apartID %>
+                        </h4>
+                        <a class="btn btn-primary" href="<%= apartID %>/createCitizenPage">
+                            <i class="fa-regular fa-plus"></i>
+                        </a>
+                    </div>
+
+                    <div class="row ">
+                        <div class="col-md-12 ">
+                            <div class="table-responsive rounded-2">
+                                <table id="add-row" class="table table-head-bg-primary table-hover text-center ">
+                                    <thead class="table-success">
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Mã dân cư</th>
+                                            <th scope="col">Họ và tên</th>
+                                            <th scope="col">Vai trò</th>
+                                            <th scope="col">Quan hệ</th>
+                                            <th scope="col">Giới tính</th>
+                                            <th scope="col">Chức năng</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% let ordinalNumber=1 %>
+                                            <% citizen.forEach(function(citizen) { %>
+                                                <tr>
+                                                    <td>
+                                                        <%= ordinalNumber++ %>
+                                                    </td>
+                                                    <td>
+                                                        <%= citizen.CitizenID %>
+                                                    </td>
+                                                    <td>
+                                                        <%= citizen.Name %>
+                                                    </td>
+                                                    <td>
+                                                        <% if (citizen.Role==='Chủ căn hộ' ) { %>
+                                                            <span class="badge badge-danger"
+                                                                style="font-size: 13px; padding: 5px 10px;">
+                                                                <%= citizen.Role %>
+                                                            </span>
+                                                            <% } else { %>
+                                                                <span class="badge badge-info"
+                                                                    style="font-size: 13px; padding: 5px 10px;">
+                                                                    <%= citizen.Role %>
+                                                                </span>
+                                                                <% } %>
+                                                    </td>
+                                                    <td>
+                                                        <%= citizen.Relationship %>
+                                                    </td>
+                                                    <td>
+                                                        <%= citizen.Gender %>
+                                                    </td>
+                                                    <td>
+                                                        cc
+                                                    </td>
+                                                </tr>
+                                                <% }); %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
         </div>
     </div>

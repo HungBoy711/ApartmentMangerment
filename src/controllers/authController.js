@@ -10,7 +10,6 @@ const getLoginPage = async (req, res) => {
         return res.render('auth/loginPage.ejs')
     } catch (error) {
         res.status(500).json({ error: 'hiển thị thất bại', details: error });
-
     }
 }
 const getLoginCitizenPage = async (req, res) => {

@@ -2,7 +2,6 @@ const express = require('express');
 const Apartment = require('../models/apartment')
 const Citizen = require('../models/citizen')
 const paginate = require('../utils/paginate');
-const currency = require('currency.js');
 
 const getApartmentPage = async (req, res) => {
     try {
@@ -46,7 +45,9 @@ const getApartmentDetail = async (req, res) => {
     try {
         let apartID = req.params.ApartID;
         let citizen = await Citizen.find({ ApartID: apartID }).exec();
-        return res.render('apartments/apartmentDetail.ejs', { citizen: citizen, apartID: apartID })
+        return res.render('apartments/apartmentDetail.ejs', {
+            messages: req.flash(), citizen: citizen, apartID: apartID
+        })
     } catch (error) {
         console.log(error)
         res.status(400).json({ message: 'Lỗi không tìm thấy dữ liệu' });
@@ -112,10 +113,42 @@ const deleteApartment = async (req, res) => {
         res.status(400).json({ message: 'Lỗi' });
     }
 }
-
+const createCitizenPage = async (req, res) => {
+    let apartID = req.params.ApartID
+    return res.render('apartments/createCitizen.ejs', { messages: req.flash(), apartID: apartID });
+}
+const createCitizen = async (req, res) => {
+    let { CitizenID, ApartID, IdentificationCard, Role, Relationship, Name, BirthDay, Gender, Hometown, Phone } = req.body;
+    try {
+        const citizenID = await Citizen.findOne({ CitizenID })
+        if (!citizenID) {
+            await Citizen.create({
+                CitizenID,
+                ApartID,
+                IdentificationCard,
+                Role,
+                Relationship,
+                Name,
+                BirthDay,
+                Gender,
+                Hometown,
+                Phone
+            })
+            req.flash("successAddCitizen", "Thêm mới cư dân thành công!")
+            res.status(200).redirect(`/apartment/${ApartID}`);
+        } else {
+            req.flash("errorIdCitizen", "Lỗi trùng mã cư dân, vui lòng nhập lại!");
+            res.status(500).redirect(`/apartment/${ApartID}/createCitizenPage`);
+        }
+    }
+    catch (error) {
+        res.status(400).json({ message: 'Lỗi dữ liệu' });
+    }
+}
 module.exports = {
     getApartmentPage, getApartmentDetail,
     createApartmentPage, createApartment,
     editApartmentPage, editApartment,
-    deleteApartment, searchApartmentNumber
+    deleteApartment, searchApartmentNumber,
+    createCitizenPage, createCitizen
 }
