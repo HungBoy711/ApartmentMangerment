@@ -5,7 +5,9 @@ const { getApartmentPage, getApartmentDetail,
     editApartment, editApartmentPage,
     createApartmentPage, createApartment,
     deleteApartment, searchApartmentNumber,
-    createCitizen, createCitizenPage }
+    createCitizen, createCitizenPage,
+    editCitizenPage, editCitizen,
+    deleteCitizen }
     = require('../controllers/apartmentController')
 
 router.get('/', verifyToken, getApartmentPage)
@@ -19,5 +21,9 @@ router.post('/searchApartmentNumber', verifyToken, searchApartmentNumber)
 
 router.get('/:ApartID/createCitizenPage', verifyToken, createCitizenPage)
 router.post('/:ApartID/createCitizen', verifyToken, createCitizen)
+router.get('/:ApartID/editCitizenPage/:CitizenID', verifyToken, editCitizenPage)
+router.post('/:ApartID/editCitizen', verifyToken, editCitizen)
+router.post('/:ApartID/deleteCitizen', verifyToken, deleteCitizen)
+
 
 module.exports = router

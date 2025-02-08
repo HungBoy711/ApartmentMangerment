@@ -19,7 +19,7 @@
                                     <div class="col-md-6 col-lg-4">
                                         <div class="form-group">
                                             <label>Số căn hộ</label>
-                                            <input required type="number" name="ApartID" class="form-control"
+                                            <input readonly required type="number" name="ApartID" class="form-control"
                                                 value="<%= apartment.ApartID %>" readonly>
                                         </div>
                                         <div class="form-group ">
@@ -37,11 +37,12 @@
                                         <div class="form-group">
                                             <label>Trạng thái</label>
                                             <select class="form-select" name="Status">
-                                                <option value="<%= apartment.Status %>">--<%= apartment.Status %>--
-                                                </option>
-                                                <option>Đang ở</option>
-                                                <option>Không sử dụng</option>
-                                                <option>Sửa chữa</option>
+                                                <option value="Đang ở" <%=apartment.Status==='Đang ở' ? 'selected' : ''
+                                                    %>>Đang ở</option>
+                                                <option value="Trống" <%=apartment.Status==='Trống' ? 'selected' : '' %>
+                                                    >Trống</option>
+                                                <option value="Sửa chữa" <%=apartment.Status==='Sửa chữa' ? 'selected'
+                                                    : '' %>>Sửa chữa</option>
                                             </select>
                                         </div>
                                     </div>

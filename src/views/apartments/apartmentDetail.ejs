@@ -1,13 +1,19 @@
 <%- include('../layouts/index.ejs') %>
     <div class="container">
         <div class="page-inner">
-            <% if (messages.successAddCitizen) { %>
+            <% if (messages.successAddCitizen || messages.successDeleteCitizen || messages.successEditCitizen) { %>
                 <div class="d-flex justify-content-end">
                     <div class="alert alert-success alert-dismissible fade show" style="width: 300px; position: fixed;"
                         role="alert">
-                        <%= messages.successAddCitizen %>
-                            <button type="button" class="btn-close btn-sm" data-bs-dismiss="alert"
-                                aria-label="Close"></button>
+                        <% if (messages.successAddCitizen) { %>
+                            <%= messages.successAddCitizen %>
+                                <% } else if (messages.successDeleteCitizen) { %>
+                                    <%= messages.successDeleteCitizen %>
+                                        <% } else { %>
+                                            <%= messages.successEditCitizen %>
+                                                <% } %>
+                                                    <button type="button" class="btn-close btn-sm"
+                                                        data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 </div>
                 <% } %>
@@ -22,62 +28,91 @@
                         </a>
                     </div>
 
-                    <div class="row ">
-                        <div class="col-md-12 ">
-                            <div class="table-responsive rounded-2">
-                                <table id="add-row" class="table table-head-bg-primary table-hover text-center ">
-                                    <thead class="table-success">
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Mã dân cư</th>
-                                            <th scope="col">Họ và tên</th>
-                                            <th scope="col">Vai trò</th>
-                                            <th scope="col">Quan hệ</th>
-                                            <th scope="col">Giới tính</th>
-                                            <th scope="col">Chức năng</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <% let ordinalNumber=1 %>
-                                            <% citizen.forEach(function(citizen) { %>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <% if (citizen.length===0) { %>
+                                <div style="margin-top: 15%;">
+                                    <h1 class="text-center text-muted">
+                                        <i class="fa-solid fa-door-open fa-2xl"></i>?
+                                    </h1>
+                                </div>
+
+                                <h1 class="text-center text-muted">Căn hộ trống</h1>
+                                <% } else { %>
+                                    <div class="table-responsive rounded-2">
+                                        <table id="add-row" class="table table-head-bg-primary table-hover text-center">
+                                            <thead class="table-success">
                                                 <tr>
-                                                    <td>
-                                                        <%= ordinalNumber++ %>
-                                                    </td>
-                                                    <td>
-                                                        <%= citizen.CitizenID %>
-                                                    </td>
-                                                    <td>
-                                                        <%= citizen.Name %>
-                                                    </td>
-                                                    <td>
-                                                        <% if (citizen.Role==='Chủ căn hộ' ) { %>
-                                                            <span class="badge badge-danger"
-                                                                style="font-size: 13px; padding: 5px 10px;">
-                                                                <%= citizen.Role %>
-                                                            </span>
-                                                            <% } else { %>
-                                                                <span class="badge badge-info"
-                                                                    style="font-size: 13px; padding: 5px 10px;">
-                                                                    <%= citizen.Role %>
-                                                                </span>
-                                                                <% } %>
-                                                    </td>
-                                                    <td>
-                                                        <%= citizen.Relationship %>
-                                                    </td>
-                                                    <td>
-                                                        <%= citizen.Gender %>
-                                                    </td>
-                                                    <td>
-                                                        cc
-                                                    </td>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Mã dân cư</th>
+                                                    <th scope="col">Họ và tên</th>
+                                                    <th scope="col">Vai trò</th>
+                                                    <th scope="col">Quan hệ</th>
+                                                    <th scope="col">Giới tính</th>
+                                                    <th scope="col">Chức năng</th>
                                                 </tr>
-                                                <% }); %>
-                                    </tbody>
-                                </table>
-                            </div>
+                                            </thead>
+                                            <tbody>
+                                                <% let ordinalNumber=1 %>
+                                                    <% citizen.forEach(function(citizen) { %>
+                                                        <tr>
+                                                            <td>
+                                                                <%= ordinalNumber++ %>
+                                                            </td>
+                                                            <td>
+                                                                <%= citizen.CitizenID %>
+                                                            </td>
+                                                            <td>
+                                                                <%= citizen.Name %>
+                                                            </td>
+                                                            <td>
+                                                                <% if (citizen.Role==='Chủ căn hộ' ) { %>
+                                                                    <span class="badge badge-danger"
+                                                                        style="font-size: 13px; padding: 5px 10px;">
+                                                                        <%= citizen.Role %>
+                                                                    </span>
+                                                                    <% } else { %>
+                                                                        <span class="badge badge-info"
+                                                                            style="font-size: 13px; padding: 5px 10px;">
+                                                                            <%= citizen.Role %>
+                                                                        </span>
+                                                                        <% } %>
+                                                            </td>
+                                                            <td>
+                                                                <%= citizen.Relationship %>
+                                                            </td>
+                                                            <td>
+                                                                <%= citizen.Gender %>
+                                                            </td>
+                                                            <td>
+                                                                <a class="border-0 bg-transparent"
+                                                                    href="<%= apartID %>/editCitizenPage/<%= citizen.CitizenID %>">
+                                                                    <i class="fa-solid fa-pencil"
+                                                                        style="color: #1572e8;"></i>
+                                                                </a>
+                                                                <form action="<%= apartID %>/deleteCitizen"
+                                                                    method="post"
+                                                                    onsubmit="return confirm('Xóa cư dân <%= citizen.Name %>?');"
+                                                                    style="display: inline;">
+                                                                    <input type="hidden" name="ApartID"
+                                                                        value="<%= apartID %>">
+                                                                    <input type="hidden" name="CitizenID"
+                                                                        value="<%= citizen.CitizenID %>">
+                                                                    <button type="submit"
+                                                                        class="delete-btn border-0 bg-transparent">
+                                                                        <i class="fa-solid fa-trash"
+                                                                            style="color: red;"></i>
+                                                                    </button>
+                                                                </form>
+                                                            </td>
+                                                        </tr>
+                                                        <% }); %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <% } %>
                         </div>
                     </div>
+
         </div>
     </div>

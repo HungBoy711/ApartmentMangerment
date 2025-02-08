@@ -45,6 +45,11 @@ const getApartmentDetail = async (req, res) => {
     try {
         let apartID = req.params.ApartID;
         let citizen = await Citizen.find({ ApartID: apartID }).exec();
+
+        let citizenCount = await Citizen.countDocuments({ ApartID: apartID });
+        const status = citizenCount > 0 ? "Đang ở" : "Trống";
+        await Apartment.updateOne({ ApartID: apartID }, { $set: { Status: status } });
+
         return res.render('apartments/apartmentDetail.ejs', {
             messages: req.flash(), citizen: citizen, apartID: apartID
         })
@@ -118,7 +123,8 @@ const createCitizenPage = async (req, res) => {
     return res.render('apartments/createCitizen.ejs', { messages: req.flash(), apartID: apartID });
 }
 const createCitizen = async (req, res) => {
-    let { CitizenID, ApartID, IdentificationCard, Role, Relationship, Name, BirthDay, Gender, Hometown, Phone } = req.body;
+    let { CitizenID, ApartID, IdentificationCard, Role, Relationship,
+        Name, BirthDay, Gender, Hometown, Phone } = req.body;
     try {
         const citizenID = await Citizen.findOne({ CitizenID })
         if (!citizenID) {
@@ -145,10 +151,54 @@ const createCitizen = async (req, res) => {
         res.status(400).json({ message: 'Lỗi dữ liệu' });
     }
 }
+const editCitizenPage = async (req, res) => {
+    let apartID = req.params.ApartID
+    let CitizenID = req.params.CitizenID
+    let citizen = await Citizen.findOne({ CitizenID: CitizenID });
+    return res.render('apartments/editCitizen.ejs', { citizen: citizen, apartID: apartID })
+}
+const editCitizen = async (req, res) => {
+    let { CitizenID, ApartID, Name, BirthDay, Phone,
+        IdentificationCard, Gender, Hometown, Relationship, Role } = req.body;
+    try {
+        await Citizen.updateOne({ CitizenID: CitizenID }, {
+            Name,
+            BirthDay,
+            Phone,
+            IdentificationCard,
+            Gender,
+            Hometown,
+            Relationship,
+            Role
+        });
+        req.flash("successEditCitizen", "Sửa thông tin cư dân thành công!");
+        res.status(200).redirect(`/apartment/${ApartID}`);
+    }
+    catch (error) {
+        console.log(error);
+        res.status(400).json({ message: 'Lỗi dữ liệu không hợp lệ' });
+    }
+};
+const deleteCitizen = async (req, res) => {
+    let ApartID = req.body.ApartID
+    let CitizenID = req.body.CitizenID
+    try {
+        await Citizen.deleteOne({
+            CitizenID: CitizenID
+        });
+        req.flash("successDeleteCitizen", "Xóa Cư dân thành công!")
+        res.status(200).redirect(`/apartment/${ApartID}`);
+    }
+    catch (error) {
+        res.status(400).json({ message: 'Lỗi' });
+    }
+}
 module.exports = {
     getApartmentPage, getApartmentDetail,
     createApartmentPage, createApartment,
     editApartmentPage, editApartment,
     deleteApartment, searchApartmentNumber,
-    createCitizenPage, createCitizen
+    createCitizenPage, createCitizen,
+    editCitizenPage, editCitizen,
+    deleteCitizen
 }
