@@ -9,6 +9,7 @@ const { MongoClient, ServerApiVersion } = require('mongodb')
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const flash = require('connect-flash');
+const { google } = require('googleapis');
 
 const app = express()
 const port = process.env.PORT || 4000
@@ -29,22 +30,6 @@ app.use(express.urlencoded({ extended: true }))
 configViewEngine(app)
 
 app.use('/', routes);
-
-// (async () => {
-//     try {
-//         const url = process.env.DB_HOST_WITH_DRIVER;
-//         const client = new MongoClient(url);
-//         const dbName = process.env.DB_NAME;
-//         await client.connect();
-//         console.log('Connected successfully to server');
-//         app.listen(port, hostname, () => {
-//             console.log(`Web running succeed on port ${port}`);
-//         })
-//     } catch (error) {
-//         console.log('Failed');
-//     }
-// })();
-
 
 connection()
 const client = new MongoClient(process.env.DB_HOST_ATLAS, {
@@ -68,6 +53,8 @@ const run = async () => {
 };
 
 run().catch(console.dir);
+
+
 
 
 

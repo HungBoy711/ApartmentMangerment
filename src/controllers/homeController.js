@@ -1,10 +1,7 @@
 const express = require('express');
 const Apartment = require('../models/apartment')
 const Citizen = require('../models/citizen')
-const Contract = require('../models/contract')
 const Asset = require('../models/asset')
-const Invoice = require('../models/invoice')
-
 
 const getData = async (req, res) => {
     try {
@@ -32,7 +29,7 @@ const getData = async (req, res) => {
         // let ContractWithBuy = await Contract.find({ ContractType: "Mua bán" });
         // let ContractWithRent = await Contract.find({ ContractType: "Cho thuê" });
 
-        return res.render('home/homePage', );
+        return res.render('home/homePage',);
     } catch (error) {
         console.error("Lỗi data:", error);
         return res.render('errorData.ejs');

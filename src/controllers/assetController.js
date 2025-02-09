@@ -1,14 +1,27 @@
 const express = require('express');
 const Asset = require('../models/asset')
+const paginate = require('../utils/paginate');
 
 const getAssetPage = async (req, res) => {
-    let assetCatID = req.params.AssetCatID
-    let asset = await Asset.find({ AssetCatID: assetCatID }).exec()
-    return res.render('asset/assetPage.ejs', { listAssets: asset })
+    try {
+        const { results, pagination } = paginate(req, Asset.find({}));
+
+        const totalAssets = await Asset.countDocuments({});
+        const totalPages = Math.ceil(totalAssets / pagination.limit);
+
+        let listAssets = await results;
+        return res.render('asset/assetPage.ejs', {
+            listAssets: listAssets,
+            currentPage: pagination.page,
+            totalPages: totalPages,
+            messages: req.flash()
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({ message: 'Lỗi không tìm thấy dữ liệu' });
+    }
 }
-const createAssetPage = (req, res) => {
-    return res.render('asset/create-Asset.ejs')
-}
+
 const createAsset = async (req, res) => {
     let AssetID = req.body.AssetID
     let AssetCatID = req.body.AssetCatID
@@ -69,7 +82,7 @@ const deleteAsset = async (req, res) => {
     res.redirect('/asset/' + AssetCatID);
 }
 module.exports = {
-    createAssetPage, createAsset,
+    createAsset,
     editAssetPage, editAsset,
     deleteAssetPage, deleteAsset,
     getAssetPage

@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@google-cloud/local-auth": "^2.1.0",
+    "axios": "^1.7.9",
     "bcrypt": "^5.1.1",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.7",
@@ -20,6 +22,8 @@
     "express-fileupload": "^1.5.0",
     "express-flash": "^0.0.2",
     "express-session": "^1.18.1",
+    "facebook-chat-api": "^1.8.0",
+    "googleapis": "^105.0.0",
     "jsonwebtoken": "^9.0.2",
     "module-alias": "^2.2.3",
     "moment": "^2.30.1",

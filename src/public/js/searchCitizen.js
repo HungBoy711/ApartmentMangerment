@@ -8,8 +8,8 @@ function updateAction() {
     var form = document.getElementById("searchForm");
 
     if (searchType === "citizen") {
-        form.action = "/citizenSearch";
+        form.action = "/citizen/citizenSearch";
     } else {
-        form.action = "/citizenRoomSearch";
+        form.action = "/citizen/citizenRoomSearch";
     }
 }

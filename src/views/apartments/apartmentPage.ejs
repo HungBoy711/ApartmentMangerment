@@ -42,7 +42,7 @@
                                 <table id="add-row" class="table table-head-bg-primary table-hover text-center ">
                                     <thead class="table-success">
                                         <tr>
-                                            <th scope="col" style="display: none;">#</th>
+                                            <th scope="col">#</th>
                                             <th scope="col">Số căn hộ</th>
                                             <th scope="col">Tầng</th>
                                             <th scope="col">Số lượng phòng</th>
@@ -52,58 +52,62 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <% listApartments.forEach(function(apartment) { %>
-                                            <tr>
-                                                <td style="display: none;">
-                                                    <%= apartment.id %>
-                                                </td>
-                                                <td>
-                                                    <%= apartment.ApartID %>
-                                                </td>
-                                                <td>
-                                                    <%= apartment.Floor %>
-                                                </td>
-                                                <td>
-                                                    <%= apartment.TotalRoom %>
-                                                </td>
+                                        <% let ordinalNumber=1 %>
+                                            <% listApartments.forEach(function(apartment) { %>
+                                                <tr>
+                                                    <td>
+                                                        <%= ordinalNumber++ %>
+                                                    </td>
+                                                    <td style="display: none;">
+                                                        <%= apartment.id %>
+                                                    </td>
+                                                    <td>
+                                                        <%= apartment.ApartID %>
+                                                    </td>
+                                                    <td>
+                                                        <%= apartment.Floor %>
+                                                    </td>
+                                                    <td>
+                                                        <%= apartment.TotalRoom %>
+                                                    </td>
 
-                                                <td>
+                                                    <td>
 
-                                                    <% if (apartment.Status==='Đang ở' ) { %>
-                                                        <i class="fa-solid fa-circle fa-2xs"
-                                                            style="color: #f25961;"></i>
-                                                        <%= apartment.Status %>
-                                                            <% } else { %>
-                                                                <%= apartment.Status %>
-                                                                    <% } %>
-                                                </td>
-                                                <td>
-                                                    <%= apartment.Size %> m2
-                                                </td>
-                                                <td>
-                                                    <a class="btn btn-success btn-sm btn-warning text-dark "
-                                                        style="text-decoration: none; margin-right: 10px;"
-                                                        href="/apartment/<%= apartment.ApartID %>">
-                                                        <i class="fa-solid fa-eye"></i>&nbsp;
-                                                        <small>Xem căn hộ</small>
-                                                    </a>
-                                                    <a class=" border-0 bg-transparent"
-                                                        href="/apartment/editApartmentPage/<%= apartment.ApartID %>">
-                                                        <i class="fa-solid fa-pencil" style="color: #1572e8;"></i>
-                                                    </a>
-                                                    <form action="/apartment/deleteApartment" method="post"
-                                                        onsubmit="return confirm('Xóa căn hộ <%= apartment.ApartID %>?');"
-                                                        style="display: inline;">
-                                                        <input type="hidden" name="ApartID"
-                                                            value="<%= apartment.ApartID %>">
-                                                        <button type="submit"
-                                                            class="delete-btn border-0 bg-transparent">
-                                                            <i class="fa-solid fa-trash" style="color: red;"></i>
-                                                        </button>
-                                                    </form>
-                                                </td>
-                                            </tr>
-                                            <% }); %>
+                                                        <% if (apartment.Status==='Đang ở' ) { %>
+                                                            <i class="fa-solid fa-circle fa-2xs"
+                                                                style="color: #f25961;"></i>
+                                                            <%= apartment.Status %>
+                                                                <% } else { %>
+                                                                    <%= apartment.Status %>
+                                                                        <% } %>
+                                                    </td>
+                                                    <td>
+                                                        <%= apartment.Size %> m2
+                                                    </td>
+                                                    <td>
+                                                        <a class="btn btn-success btn-sm btn-warning text-dark "
+                                                            style="text-decoration: none; margin-right: 10px;"
+                                                            href="/apartment/<%= apartment.ApartID %>">
+                                                            <i class="fa-solid fa-eye"></i>&nbsp;
+                                                            <small>Xem căn hộ</small>
+                                                        </a>
+                                                        <a class=" border-0 bg-transparent"
+                                                            href="/apartment/editApartmentPage/<%= apartment.ApartID %>">
+                                                            <i class="fa-solid fa-pencil" style="color: #1572e8;"></i>
+                                                        </a>
+                                                        <form action="/apartment/deleteApartment" method="post"
+                                                            onsubmit="return confirm('Xóa căn hộ <%= apartment.ApartID %>?');"
+                                                            style="display: inline;">
+                                                            <input type="hidden" name="ApartID"
+                                                                value="<%= apartment.ApartID %>">
+                                                            <button type="submit"
+                                                                class="delete-btn border-0 bg-transparent">
+                                                                <i class="fa-solid fa-trash" style="color: red;"></i>
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                                <% }); %>
                                     </tbody>
                                 </table>
                             </div>

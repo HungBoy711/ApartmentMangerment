@@ -3,9 +3,9 @@
 
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Kaiadmin - Bootstrap 5 Admin Dashboard</title>
+    <title>Hệ thống quản lý hộ chung cư</title>
     <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
-    <link rel="icon" href="/assets/img/kaiadmin/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/images/iconTitle.png" type="image/x-icon" />
 
     <!-- Fonts and icons -->
     <script src="/assets/js/plugin/webfont/webfont.min.js"></script>
@@ -27,9 +27,43 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
 
 </head>
+<style>
+    #loader {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+        z-index: 9999;
+    }
 
+    .spinner {
+        width: 50px;
+        height: 50px;
+        border: 5px solid rgba(0, 0, 0, 0.1);
+        border-top: 5px solid #3498db;
+        border-radius: 50%;
+        animation: spin 0.6s linear infinite;
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+</style>
 
 <body onload="updateDateTime()">
+    <div id="loader">
+        <div class="spinner"></div>
+    </div>
     <div class="wrapper">
         <!-- Sidebar -->
         <div class="sidebar" data-background-color="white">
@@ -70,64 +104,31 @@
                                     <li>
                                         <a href="/apartment">
                                             <i style="font-size: 12px;" class="fa-solid fa-cube fa-2xs"></i>
-                                            Danh sách căn hộ
+                                            Quản lý căn hộ
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="/categories">
+                                        <a href="/citizen" style="padding-bottom: 0px;">
                                             <i style="font-size: 12px;" class="fa-solid fa-cube fa-2xs"></i>
-                                            Danh sách cư dân
+                                            Quản lý cư dân
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="/products">
-                                            <i style="font-size: 12px;" class="fa-solid fa-cube fa-2xs"></i>
-                                            Danh sách hợp đồng
-                                        </a>
-                                    </li>
+                                    <li style="padding: 0px;"><a></a></li>
                                 </ul>
                             </div>
 
-                        <li class="nav-item"><a data-bs-toggle="collapse" href="#base2"> <i
-                                    class="fa-solid fa-file-lines"></i>
-                                <p>Hóa đơn</p> <span class="caret"></span>
+                        <li class=" nav-item "><a href=" /asset" aria-expanded="false"> <i
+                                    class="fa-solid fa-fire-extinguisher"></i>
+                                <p>Cơ sở vật chất</p>
                             </a>
-                            <div class="collapse" id="base2">
-                                <ul>
-                                    <li>
-                                        <a href="/suppliers">
-                                            <i style="font-size: 12px;" class="fa-solid fa-cube fa-2xs"></i>
-                                            Tiền nước
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/categories">
-                                            <i style="font-size: 12px;" class="fa-solid fa-cube fa-2xs"></i>
-                                            Tiền điện
-                                        </a>
-                                    </li>
-
-                                </ul>
-                            </div>
-
-                        <li class="nav-item"><a data-bs-toggle="collapse" href="#sidebarLayouts"> <i
-                                    class="fa-solid fa-user-gear"></i>
-                                <p>Hệ thống</p> <span class="caret"></span>
-                            </a>
-                            <div class="collapse" id="sidebarLayouts">
-                                <ul>
-                                    <li><a href="../sidebar-style-2.html">
-                                            <i style="font-size: 12px;" class="fa-solid fa-cube fa-2xs"></i>
-                                            Quản lý tài khoản
-                                        </a></li>
-                                    <li><a href="/users">
-                                            <i style="font-size: 12px;" class="fa-solid fa-cube fa-2xs"></i>Cài đặt
-                                        </a></li>
-                                </ul>
-                            </div>
                         </li>
 
-                        <li class="nav-item"><a href="/" aria-expanded="false"> <i
+                        <li class="nav-item "><a href="/homepage" aria-expanded="false"> <i
+                                    class="fa-solid fa-user-gear"></i>
+                                <p>Quản lý tài khoản</p>
+                            </a></li>
+
+                        <li class="nav-item"><a href="/logout" aria-expanded="false"> <i
                                     class="fa-sharp fa-solid fa-arrow-right-from-bracket"></i>
                                 <p>Đăng xuất</p>
                             </a></li>
@@ -186,7 +187,7 @@
                                 <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#"
                                     aria-expanded="false">
                                     <div class="avatar-sm">
-                                        <img src="/images/Admin.png" alt="..." class="avatar-img rounded-circle" />
+                                        <img src="/images/logoAdminF.png" alt="..." class="avatar-img rounded-circl" />
                                     </div>
                                     <span class="profile-username">
                                         <span class="op-7">Xin chào,</span>
@@ -237,5 +238,6 @@
 <!-- Kaiadmin DEMO methods, don't include it in your project! -->
 <script src="/assets/js/setting-demo.js"></script>
 <script src="/assets/js/demo.js"></script>
+<script src="/js/loading.js"></script>
 
 </html>

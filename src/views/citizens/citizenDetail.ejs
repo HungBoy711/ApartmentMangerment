@@ -1,0 +1,103 @@
+<%- include('../layouts/index.ejs') %>
+    <div class="container">
+        <div class="page-inner">
+            <a class="btn btn-light rounded-3" href="/citizen">
+                <i class="fa-solid fa-arrow-left-long"></i>
+            </a>
+            <div class="page-header"></div>
+            <div class="row">
+                <form>
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">Thông tin cư dân <%= citizen.Name %>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-4">
+                                        <input type="hidden" name="ApartID" value="<%= citizen.ApartID %>">
+                                        <div class="form-group">
+                                            <label for="CitizenID">Mã cư dân</label>
+                                            <input required type="text" name="CitizenID" class="form-control"
+                                                value="<%= citizen.CitizenID %>" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Relationship">Quan hệ</label>
+                                            <select class="form-select" name="Relationship">
+                                                <option value="Cha" <%=citizen.Relationship==='Cha' ? 'selected' : '' %>
+                                                    >Cha</option>
+                                                <option value="Mẹ" <%=citizen.Relationship==='Mẹ' ? 'selected' : '' %>
+                                                    >Mẹ</option>
+                                                <option value="Con" <%=citizen.Relationship==='Con' ? 'selected' : '' %>
+                                                    >Con</option>
+                                                <option value="Ông" <%=citizen.Relationship==='Ông' ? 'selected' : '' %>
+                                                    >Ông</option>
+                                                <option value="Bà" <%=citizen.Relationship==='Bà' ? 'selected' : '' %>
+                                                    >Bà</option>
+                                                <option value="Cháu" <%=citizen.Relationship==='Cháu' ? 'selected' : ''
+                                                    %>>Cháu</option>
+                                                <option value="Khác" <%=citizen.Relationship==='Khác' ? 'selected' : ''
+                                                    %>>Khác</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Vai trò</label>
+                                            <select class="form-select" name="Role">
+                                                <option value="Thành viên căn hộ" <%=citizen.Role==='Thành viên căn hộ'
+                                                    ? 'selected' : '' %>>Thành viên căn hộ</option>
+                                                <option value="Chủ căn hộ" <%=citizen.Role==='Chủ căn hộ' ? 'selected'
+                                                    : '' %>>Chủ căn hộ</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-4">
+                                        <div class="form-group">
+                                            <label for="Name">Họ và tên</label>
+                                            <input required type="text" name="Name" class="form-control"
+                                                value="<%= citizen.Name %>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="BirthDay">Ngày sinh</label>
+                                            <input required type="date" name="BirthDay" class="form-control"
+                                                value="<%= citizen.BirthDay.toISOString().split('T')[0] %>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Phone">Số điện thoại</label>
+                                            <input required type="number" name="Phone" class="form-control"
+                                                value="<%= citizen.Phone %>">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-4">
+                                        <div class="form-group">
+                                            <label for="IdentificationCard">Số căn cước công dân</label>
+                                            <input required type="number" name="IdentificationCard" class="form-control"
+                                                value="<%= citizen.IdentificationCard %>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Giới tính</label><br />
+                                            <label class="form-radio-label">
+                                                <input class="form-radio-input" type="radio" name="Gender" value="Nam"
+                                                    <%=citizen.Gender==='Nam' ? 'checked' : '' %> required>
+                                                <span class="form-radio-sign">Nam</span>
+                                            </label>
+                                            <label class="form-radio-label ml-3">
+                                                <input class="form-radio-input" type="radio" name="Gender" value="Nữ"
+                                                    <%=citizen.Gender==='Nữ' ? 'checked' : '' %> >
+                                                <span class="form-radio-sign">Nữ</span>
+                                            </label>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Hometown">Quê quán</label>
+                                            <input required type="text" name="Hometown" class="form-control"
+                                                value="<%= citizen.Hometown %>">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>

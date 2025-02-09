@@ -1,158 +1,127 @@
-<script src="/js/searchCitizen.js"></script>
+<%- include('../layouts/index.ejs') %>
+    <div class="container">
+        <div class="page-inner">
 
-<body>
-    <%- include('../citizens/create-Citizen.ejs') %>
-        <%- include('../citizens/edit-Citizen.ejs') %>
-            <%- include('../citizens/delete-Citizen.ejs') %>
-                <div class="wrapper">
-                    <div class="main-header">
-                        <%- include('../layouts/index.ejs') %>
-                            <div class="main-panel">
-                                <div class="content">
-                                    <div class="container-fluid">
-                                        <div class="row mb-3">
-                                            <div class="col-md-6" style="margin-bottom: -1%;">
-                                                <form id="searchForm" action="/citizenSearch" method="POST"
-                                                    onsubmit="updateAction()">
-                                                    <div style="width: 400px;" class="input-group">
-                                                        <select id="searchType" class="form-control"
-                                                            onchange="updatePlaceholder()">
-                                                            <option value="citizen">Tìm theo tên</option>
-                                                            <option value="room">Tìm theo phòng</option>
-                                                        </select>
-                                                        <input id="searchInput" name="data" type="text"
-                                                            class="form-control" placeholder="Tìm dân cư">
-                                                        <div class="input-group-append">
-                                                            <button class="btn btn-primary" type="submit">
-                                                                <i class="fa fa-search"></i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <div class="col-md-6 text-right">
-                                                <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                    data-target="#createCitizenModal">
-                                                    <i class="fa-regular fa-plus"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <div class="card-title">Thông tin dân cư</div>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <table class="table table-hover">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th scope="col" style="display: none;">#</th>
-                                                                    <th scope="col">Mã dân cư</th>
-                                                                    <th scope="col">Số căn hộ</th>
-                                                                    <th scope="col">Họ và tên</th>
-                                                                    <th scope="col">quan hệ</th>
-                                                                    <th scope="col">Ngày sinh</th>
-                                                                    <th scope="col">Giới tính</th>
-                                                                    <th scope="col">Quê hương</th>
-                                                                    <th scope="col">Số điện thoại</th>
-                                                                    <th scope="col">Chức năng</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <% listCitizens.forEach(function(citizen) { %>
-                                                                    <tr>
-                                                                        <td style="display: none;">
-                                                                            <%= citizen._id %>
-                                                                        </td>
-                                                                        <td>
-                                                                            <%= citizen.CitizenID %>
-                                                                        </td>
-                                                                        <td>
-                                                                            <%= citizen.ApartID %>
-                                                                        </td>
-                                                                        <td>
-                                                                            <%= citizen.Name %>
-                                                                        </td>
-                                                                        <td>
-                                                                            <%= citizen.relationship %>
-                                                                        </td>
-                                                                        <td>
-                                                                            <%= citizen.BirthDay.toLocaleDateString() %>
-                                                                        </td>
-                                                                        <td>
-                                                                            <%= citizen.Gender %>
-                                                                        </td>
-                                                                        <td>
-                                                                            <%= citizen.Hometown %>
-                                                                        </td>
-                                                                        <td>
-                                                                            0<%= citizen.Phone %>
-                                                                        </td>
-                                                                        <td>
-                                                                            <button class="edit-btn" data-toggle="modal"
-                                                                                data-target="#editCitizenModal"
-                                                                                data-id="<%= citizen._id %>"
-                                                                                data-citizenid="<%= citizen.CitizenID %>"
-                                                                                data-apartid="<%= citizen.ApartID %>"
-                                                                                data-name="<%= citizen.Name %>"
-                                                                                data-relationship="<%= citizen.relationship %>"
-                                                                                data-birthday="<%= citizen.BirthDay %>"
-                                                                                data-gender="<%= citizen.Gender %>"
-                                                                                data-hometown="<%= citizen.Hometown %>"
-                                                                                data-phone="<%= citizen.Phone %>">
-                                                                                <i class="fa-solid fa-pencil"></i>
-                                                                            </button>
-
-                                                                            <button class="delete-btn"
-                                                                                data-toggle="modal"
-                                                                                data-target="#deleteCitizenModal"
-                                                                                data-id="<%= citizen._id %>"
-                                                                                data-apartid="<%= citizen.ApartID %>"
-                                                                                data-name="<%= citizen.Name %>">
-                                                                                <i class="fa-solid fa-trash"></i>
-                                                                            </button>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <% }); %>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                    <div class="card-footer">
-                                                        <ul class="pagination d-flex justify-content-center">
-                                                            <% if (currentPage> 1) { %>
-                                                                <li class="page-item">
-                                                                    <a class="page-link"
-                                                                        href="?page=<%= currentPage - 1 %>&limit=5">Trước</a>
-                                                                </li>
-                                                                <% } %>
-                                                                    <% for (let i=1; i <=totalPages; i++) { %>
-                                                                        <li
-                                                                            class="page-item <%= i === currentPage ? 'active' : '' %>">
-                                                                            <a class="page-link"
-                                                                                href="?page=<%= i %>&limit=5">
-                                                                                <%= i %>
-                                                                            </a>
-                                                                        </li>
-                                                                        <% } %>
-                                                                            <% if (currentPage < totalPages) { %>
-                                                                                <li class="page-item">
-                                                                                    <a class="page-link"
-                                                                                        href="?page=<%= currentPage + 1 %>&limit=5">Tiếp</a>
-                                                                                </li>
-                                                                                <% } %>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
+            <div class="page-header mb-2">
+                <h4>Danh sách căn hộ</h4>
+            </div>
+            <div class=" d-flex justify-content-between align-items-center mb-3">
+                <form id="searchForm" action="/citizen/citizenSearch" method="POST" onsubmit="updateAction()">
+                    <div style="width: 400px;" class="input-group">
+                        <select id="searchType" class="form-select" onchange="updatePlaceholder()">
+                            <option value="citizen">Tìm theo tên</option>
+                            <option value="room">Tìm theo phòng</option>
+                        </select>
+                        <input id="searchInput" name="data" type="text" class="form-control" placeholder="Tìm dân cư">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
                     </div>
-                </div>
-</body>
-<script src="/js/getDataCitizen.js"></script>
+                </form>
+            </div>
+            <div class="row ">
+                <div class="col-md-12 ">
+                    <div class="table-responsive rounded-2">
+                        <table id="add-row" class="table table-head-bg-primary table-hover text-center">
+                            <thead class="table-success">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Mã dân cư</th>
+                                    <th scope="col">Họ và tên</th>
+                                    <th scope="col">Vai trò</th>
+                                    <th scope="col">Ngày sinh</th>
+                                    <th scope="col">Giới tính</th>
+                                    <th scope="col">Chức năng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% let ordinalNumber=1 %>
+                                    <% listCitizens.forEach(function(citizen) { %>
+                                        <tr>
+                                            <td>
+                                                <%= ordinalNumber++ %>
+                                            </td>
+                                            <td>
+                                                <%= citizen.CitizenID %>
+                                            </td>
+                                            <td>
+                                                <%= citizen.Name %>
+                                            </td>
+                                            <td>
+                                                <% if (citizen.Role==='Chủ căn hộ' ) { %>
+                                                    <span class="badge badge-danger"
+                                                        style="font-size: 13px; padding: 5px 10px;">
+                                                        <%= citizen.Role %>
+                                                    </span>
+                                                    <% } else { %>
+                                                        <span class="badge badge-info"
+                                                            style="font-size: 13px; padding: 5px 10px;">
+                                                            <%= citizen.Role %>
+                                                        </span>
+                                                        <% } %>
+                                            </td>
+                                            <td>
+                                                <%= citizen.BirthDay.toLocaleDateString() %>
+                                            </td>
+                                            <td>
+                                                <%= citizen.Gender %>
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-success btn-sm btn-success text-white "
+                                                    style="text-decoration: none; margin-right: 10px;"
+                                                    href="/citizen/<%= citizen.CitizenID %>">
+                                                    <i class="fa-regular fa-id-card fa-lg"
+                                                        style="color: #ffffff;"></i>&nbsp;
+                                                    <small>Thông tin chi tiết</small>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <% }); %>
+                            </tbody>
+                        </table>
+                    </div>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination d-flex justify-content-center">
+                            <% if (parseInt(currentPage)> 1) { %>
+                                <li class="page-item">
+                                    <a class="page-link" href="?page=<%= currentPage - 1 %>&limit=5">
+                                        <span>Trước</span>
+                                    </a>
+                                </li>
+                                <% } else { %>
+                                    <li class="page-item disabled">
+                                        <span class="page-link">Trước</span>
+                                    </li>
+                                    <% } %>
 
-</html>
+                                        <% for (let i=1; i <=totalPages; i++) { %>
+                                            <li class="page-item <%= i === parseInt(currentPage) ? 'active' : '' %>">
+                                                <a class="page-link" href="?page=<%= i %>&limit=5">
+                                                    <%= i %>
+                                                </a>
+                                            </li>
+                                            <% } %>
+
+                                                <% if (parseInt(currentPage) < totalPages) { %>
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="?page=<%= currentPage + 1 %>&limit=5"
+                                                            aria-label="Next">
+                                                            <span aria-hidden="true">Sau</span>
+                                                        </a>
+                                                    </li>
+                                                    <% } else { %>
+                                                        <li class="page-item disabled">
+                                                            <span class="page-link" aria-hidden="true">Sau
+                                                            </span>
+                                                        </li>
+                                                        <% } %>
+                        </ul>
+                    </nav>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/js/searchCitizen.js"></script>
