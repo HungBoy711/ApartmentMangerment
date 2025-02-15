@@ -5,33 +5,17 @@ const Asset = require('../models/asset')
 
 const getData = async (req, res) => {
     try {
-        // let countApart = await Apartment.find({}).count();
-        // let countCitizen = await Citizen.find({}).count();
-        // let countContract = await Contract.find({}).count();
-        // let countAsset = await Asset.find({}).count();
-        // let countInvoice = await Invoice.find({}).count();
-
-        // let [results] = await Invoice.aggregate([
-        //     {
-        //         $group: {
-        //             _id: null,
-        //             totalAmount: {
-        //                 $sum: {
-        //                     $add: ["$ApartmentFee", "$ElectricityFee", "$WaterFee"]
-        //                 }
-        //             }
-        //         }
-        //     }
-        // ]);
-
-        // const totalInvoive = results ? results.totalAmount : 0
-
-        // let ContractWithBuy = await Contract.find({ ContractType: "Mua bán" });
-        // let ContractWithRent = await Contract.find({ ContractType: "Cho thuê" });
-
-        return res.render('home/homePage',);
+        const [countApart, countEmpty, countCitizen] = await Promise.all([
+            Apartment.countDocuments({ Status: "Đang ở" }),
+            Apartment.countDocuments({ Status: "Trống" }),
+            Citizen.countDocuments({})
+        ]);
+        return res.render('home/homePage', {
+            countApart,
+            countEmpty,
+            countCitizen
+        });
     } catch (error) {
-        console.error("Lỗi data:", error);
         return res.render('errorData.ejs');
     }
 }

@@ -1,16 +1,16 @@
 <%- include('../layouts/index.ejs') %>
     <div class="container">
         <div class="page-inner">
-            <% if (messages.successAddAp || messages.successDeleteAp || messages.successEditAp) { %>
+            <% if (messages.successAddAsset || messages.successDeleteAsset || messages.successEditAsset) { %>
                 <div class="d-flex justify-content-end">
                     <div class="alert alert-success alert-dismissible fade show" style="width: 300px; position: fixed;"
                         role="alert">
-                        <% if (messages.successAddAp) { %>
-                            <%= messages.successAddAp %>
-                                <% } else if (messages.successDeleteAp) { %>
-                                    <%= messages.successDeleteAp %>
+                        <% if (messages.successAddAsset) { %>
+                            <%= messages.successAddAsset %>
+                                <% } else if (messages.successDeleteAsset) { %>
+                                    <%= messages.successDeleteAsset %>
                                         <% } else { %>
-                                            <%= messages.successEditAp %>
+                                            <%= messages.successEditAsset %>
                                                 <% } %>
                                                     <button type="button" class="btn-close btn-sm"
                                                         data-bs-dismiss="alert" aria-label="Close"></button>
@@ -18,22 +18,24 @@
                 </div>
                 <% } %>
                     <div class="page-header mb-2">
-                        <h4>Danh sách căn hộ</h4>
+                        <h4>Danh sách tài sản</h4>
                     </div>
                     <div class=" d-flex justify-content-between align-items-center mb-3">
-                        <form id="searchForm" action="/apartment/searchApartmentNumber" method="POST">
-                            <div style="width: 480px;" class="input-group">
-                                <select class="form-select">
-                                    <option value="apartment">Tìm theo số căn hộ</option>
+                        <form action="/asset/searchAssetCategory" method="POST">
+                            <div style="width: 250px;" class="input-group">
+                                <select class="form-select" name="searchData">
+                                    <option value="">-- Loại tài sản --</option>
+                                    <option value="Hệ thống điện & nước">Hệ thống điện & nước</option>
+                                    <option value="Hệ thống PCCC">Hệ thống PCCC</option>
+                                    <option value="Hệ thống điện an ninh">Hệ thống điện an ninh</option>
                                 </select>
-                                <input id="searchInput" name="data" type="text" class="form-control" placeholder="...">
                                 <button class="btn btn-primary" type="submit">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </div>
                         </form>
-                        <a class="btn btn-primary" href="/apartment/createApartmentPage">
-                            <i class="fa-regular fa-plus"></i> Thêm căn hộ
+                        <a class="btn btn-primary" href="/asset/createAssetPage">
+                            <i class="fa-regular fa-plus"></i> Thêm tài sản
                         </a>
                     </div>
                     <div class="row ">
@@ -43,63 +45,56 @@
                                     <thead class="table-success">
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Số căn hộ</th>
-                                            <th scope="col">Tầng</th>
-                                            <th scope="col">Số lượng phòng</th>
+                                            <th scope="col">Mã tài sản</th>
+                                            <th scope="col">Tên tài sản</th>
+                                            <th scope="col">Ngày mua</th>
                                             <th scope="col">Tình trạng</th>
-                                            <th scope="col">Diện tích</th>
-                                            <th scope="col" class="col-3">Chức năng</th>
+                                            <th scope="col">Vị trí</th>
+                                            <th scope="col">Chức năng</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <% let ordinalNumber=1 %>
-                                            <% listApartments.forEach(function(apartment) { %>
+                                            <% listAssets.forEach(function(asset) { %>
                                                 <tr>
                                                     <td>
                                                         <%= ordinalNumber++ %>
                                                     </td>
-                                                    <td style="display: none;">
-                                                        <%= apartment.id %>
+                                                    <td>
+                                                        <%= asset.AssetID %>
                                                     </td>
                                                     <td>
-                                                        <%= apartment.ApartID %>
+                                                        <%= asset.Name %>
                                                     </td>
                                                     <td>
-                                                        <%= apartment.Floor %>
+                                                        <%= asset.PurchaseDate.toLocaleDateString() %>
                                                     </td>
-                                                    <td>
-                                                        <%= apartment.TotalRoom %>
-                                                    </td>
-
                                                     <td>
 
-                                                        <% if (apartment.Status==='Đang ở' ) { %>
-                                                            <i class="fa-solid fa-circle fa-2xs"
-                                                                style="color: #f25961;"></i>
-                                                            <%= apartment.Status %>
+                                                        <% if (asset.Status==='Đang sử dụng' ) { %>
+                                                            <i class="fa-solid fa-check fa-lg"
+                                                                style="color: #9fde17;"></i>
+                                                            <%= asset.Status %>
                                                                 <% } else { %>
-                                                                    <%= apartment.Status %>
+                                                                    <i class="fa-solid fa-wrench"
+                                                                        style="color: #353131;"></i>
+                                                                    <%= asset.Status %>
                                                                         <% } %>
                                                     </td>
                                                     <td>
-                                                        <%= apartment.Size %> m2
+                                                        <%= asset.Location %>
                                                     </td>
                                                     <td>
-                                                        <a class="btn btn-success btn-sm btn-warning text-dark "
-                                                            style="text-decoration: none; margin-right: 10px;"
-                                                            href="/apartment/<%= apartment.ApartID %>">
-                                                            <i class="fa-solid fa-eye"></i>&nbsp;
-                                                            <small>Xem căn hộ</small>
-                                                        </a>
+
                                                         <a class=" border-0 bg-transparent"
-                                                            href="/apartment/editApartmentPage/<%= apartment.ApartID %>">
+                                                            href="/asset/editAssetPage/<%= asset.AssetID %>">
                                                             <i class="fa-solid fa-pencil" style="color: #1572e8;"></i>
                                                         </a>
-                                                        <form action="/apartment/deleteApartment" method="post"
-                                                            onsubmit="return confirm('Xóa căn hộ <%= apartment.ApartID %>?');"
+                                                        <form action="/asset/deleteAsset" method="post"
+                                                            onsubmit="return confirm('Xóa tài sản <%= asset.Name %>?');"
                                                             style="display: inline;">
-                                                            <input type="hidden" name="ApartID"
-                                                                value="<%= apartment.ApartID %>">
+                                                            <input type="hidden" name="AssetID"
+                                                                value="<%= asset.AssetID %>">
                                                             <button type="submit"
                                                                 class="delete-btn border-0 bg-transparent">
                                                                 <i class="fa-solid fa-trash" style="color: red;"></i>

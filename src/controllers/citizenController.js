@@ -70,7 +70,6 @@ const getCitizenDetail = async (req, res) => {
     try {
         let citizenID = req.params.CitizenID;
         let citizen = await Citizen.findOne({ CitizenID: citizenID });
-        console.log(citizen)
         return res.render('citizens/citizenDetail.ejs', {
             citizen: citizen
         })

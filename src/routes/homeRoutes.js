@@ -4,6 +4,6 @@ const verifyToken = require('../middleware/authMiddleware');
 const { getData } = require('../controllers/homeController')
 
 
-router.get('/homePage', verifyToken, getData)
+router.get('/', verifyToken, getData)
 
 module.exports = router

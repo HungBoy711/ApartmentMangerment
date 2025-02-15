@@ -14,7 +14,7 @@ router.get('/', verifyToken, (req, res) => {
     res.redirect('/homepage');
 });
 
-router.use('/', homeRoutes);
+router.use('/homePage', homeRoutes);
 router.use('/apartment', apartmentRoutes);
 router.use('/citizen', citizenRoutes);
 router.use('/asset', assetRoutes);

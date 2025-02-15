@@ -23,8 +23,10 @@
                 </div>
                 <div class="col col-stats ms-3 ms-sm-0">
                   <div class="numbers">
-                    <p class="card-category">Visitors</p>
-                    <h4 class="card-title">1,294</h4>
+                    <p class="card-category">Cư dân</p>
+                    <h4 class="card-title">
+                      <%= countCitizen %> người
+                    </h4>
                   </div>
                 </div>
               </div>
@@ -94,7 +96,7 @@
           <div class="card card-round">
             <div class="card-header">
               <div class="card-head-row">
-                <div class="card-title">User Statistics</div>
+                <div class="card-title">Biểu đồ căn hộ</div>
                 <div class="card-tools">
                   <a href="#" class="btn btn-label-success btn-round btn-sm me-2">
                     <span class="btn-label">
@@ -112,10 +114,9 @@
               </div>
             </div>
             <div class="card-body">
-              <div class="chart-container" style="min-height: 375px">
-                <canvas id="statisticsChart"></canvas>
+              <div class="chart-container">
+                <canvas id="doughnutChart" style="width: 50%; height: 50%"></canvas>
               </div>
-              <div id="myChartLegend"></div>
             </div>
           </div>
         </div>
@@ -513,3 +514,35 @@
   </div>
   </div>
   </div>
+  <script>
+    var countApart = JSON.parse('<%- JSON.stringify(countApart) %>')
+    var countEmpty = JSON.parse('<%- JSON.stringify(countEmpty) %>')
+    var myDoughnutChart = new Chart(doughnutChart, {
+      type: "doughnut",
+      data: {
+        datasets: [
+          {
+            data: [countApart, countEmpty],
+            backgroundColor: ["#1d7af3", "#fdaf4b"],
+          },
+        ],
+
+        labels: ["Căn hộ đang ở", "Căn hộ trống"],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        legend: {
+          position: "bottom",
+        },
+        layout: {
+          padding: {
+            left: 20,
+            right: 20,
+            top: 20,
+            bottom: 20,
+          },
+        },
+      },
+    });
+  </script>

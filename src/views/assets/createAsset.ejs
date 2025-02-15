@@ -1,0 +1,80 @@
+<%- include('../layouts/index.ejs') %>
+    <div class="container">
+        <div class="page-inner">
+            <% if (messages.errorIdAsset) { %>
+                <div class="d-flex justify-content-end">
+                    <div class="alert alert-danger alert-dismissible fade show" style="width: 300px; position: fixed;"
+                        role="alert">
+                        <%= messages.errorIdAsset %>
+                            <button type="button" class="btn-close btn-sm" data-bs-dismiss="alert"
+                                aria-label="Close"></button>
+                    </div>
+                </div>
+                <% } %>
+                    <a class="btn btn-light rounded-3" href="/asset">
+                        <i class="fa-solid fa-arrow-left-long"></i>
+                    </a>
+                    <div class="page-header">
+                    </div>
+                    <div class="row">
+                        <form method="POST" action="/asset/createAsset">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <div class="card-title">Thêm mới tài sản</div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6 col-lg-4">
+                                                <div class="form-group">
+                                                    <label for="AssetID">Mã tài sản</label>
+                                                    <input required type="text" name="AssetID" class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Danh mục</label>
+                                                    <select class="form-select" name="AssetCategory" required>
+                                                        <option value="" disabled selected>--Chọn danh mục--</option>
+                                                        <option>Hệ thống điện & nước </option>
+                                                        <option>Hệ thống PCCC</option>
+                                                        <option>Hệ thống an ninh</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-lg-4">
+                                                <div class="form-group">
+                                                    <label for="Name">Tên tài sản</label>
+                                                    <input required type="text" name="Name" class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Ngày mua</label>
+                                                    <input required type="date" name="PurchaseDate"
+                                                        class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-lg-4">
+                                                <div class="form-group">
+                                                    <label>Tình trạng</label>
+                                                    <select class="form-select" name="Status">
+                                                        <option value="" disabled selected>--Chọn tình trạng--</option>
+                                                        <option>Đang sử dụng</option>
+                                                        <option>Bảo trì</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Vị trí</label>
+                                                    <input required type="text" name="Location" class="form-control">
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-action">
+                                        <a href="/asset" class="btn btn-danger">Huỷ</a>
+                                        <button type="submit" class="btn btn-primary">Xác nhận</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+        </div>
+    </div>

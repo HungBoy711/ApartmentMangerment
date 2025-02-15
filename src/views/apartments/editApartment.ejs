@@ -35,15 +35,9 @@
                                                 value="<%= apartment.TotalRoom %>">
                                         </div>
                                         <div class="form-group">
-                                            <label>Trạng thái</label>
-                                            <select class="form-select" name="Status">
-                                                <option value="Đang ở" <%=apartment.Status==='Đang ở' ? 'selected' : ''
-                                                    %>>Đang ở</option>
-                                                <option value="Trống" <%=apartment.Status==='Trống' ? 'selected' : '' %>
-                                                    >Trống</option>
-                                                <option value="Sửa chữa" <%=apartment.Status==='Sửa chữa' ? 'selected'
-                                                    : '' %>>Sửa chữa</option>
-                                            </select>
+                                            <label>Tình trạng</label>
+                                            <input readonly required name="Status" class="form-control"
+                                                value="<%=apartment.Status %>">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-lg-4">

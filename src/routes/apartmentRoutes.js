@@ -14,6 +14,7 @@ router.get('/', verifyToken, getApartmentPage)
 router.get('/createApartmentPage', verifyToken, createApartmentPage)
 router.get('/editApartmentPage/:ApartID', verifyToken, editApartmentPage)
 router.get('/:ApartID', verifyToken, getApartmentDetail)
+
 router.post('/createApartment', verifyToken, createApartment)
 router.post('/editApartment', verifyToken, editApartment)
 router.post('/deleteApartment', verifyToken, deleteApartment)

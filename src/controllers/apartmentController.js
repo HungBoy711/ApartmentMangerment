@@ -18,7 +18,6 @@ const getApartmentPage = async (req, res) => {
             messages: req.flash()
         })
     } catch (error) {
-        console.log(error)
         res.status(400).json({ message: 'Lỗi không tìm thấy dữ liệu' });
     }
 
