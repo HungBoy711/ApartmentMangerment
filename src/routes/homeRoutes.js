@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const verifyToken = require('../middleware/authMiddleware');
-const { getData } = require('../controllers/homeController')
+const { getStatistical } = require('../controllers/homeController')
 
 
-router.get('/', verifyToken, getData)
+router.get('/', verifyToken, getStatistical)
 
 module.exports = router
